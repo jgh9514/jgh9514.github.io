@@ -1,0 +1,30 @@
+[
+  {
+    "name": "addpopup",
+    "path": "/addpopup",
+    "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\addpopup.vue",
+    "chunkName": "pages/addpopup",
+    "_name": "_5f639c0a"
+  },
+  {
+    "name": "inspire",
+    "path": "/inspire",
+    "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\inspire.vue",
+    "chunkName": "pages/inspire",
+    "_name": "_93f2ad8c"
+  },
+  {
+    "name": "detail-detail",
+    "path": "/detail/detail",
+    "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\detail\\\\detail.vue",
+    "chunkName": "pages/detail/detail",
+    "_name": "_05bb9af2"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_5dd33532"
+  }
+]
