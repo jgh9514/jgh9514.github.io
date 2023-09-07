@@ -1,0 +1,9 @@
+* {
+    font-family: sans-serif;
+}
+.overflow-y-hidden body {
+    overflow: hidden;
+}
+.v-dialog--fullscreen {
+    overflow-y: hidden !important;
+}
