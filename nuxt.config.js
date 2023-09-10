@@ -50,8 +50,8 @@ export default {
   axios: {
     proxyHeaders: false,
     credentials: false,
-    baseURL: 'http://localhost:8080',
-    // baseURL: 'http://jgh9512.cafe24.com',
+    // baseURL: 'http://localhost:8080',
+    baseURL: 'https://jgh9514.com',
   },
   proxy: {
   },
