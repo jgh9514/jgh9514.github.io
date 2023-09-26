@@ -51,8 +51,8 @@ export default {
   axios: {
     proxyHeaders: false,
     credentials: false,
-    baseURL: 'http://localhost:8080',
-    // baseURL: 'https://jgh9514.com',
+    // baseURL: 'http://localhost:8080',
+    baseURL: 'https://jgh9514.com',
   },
   proxy: {
   },
