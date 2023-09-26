@@ -12,15 +12,15 @@
     "chunkName": "pages/inspire"
   },
   {
-    "name": "detail-detail",
-    "path": "/detail/detail",
-    "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\detail\\\\detail.vue",
-    "chunkName": "pages/detail/detail"
-  },
-  {
     "name": "index",
     "path": "/",
     "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\index.vue",
     "chunkName": "pages/index"
+  },
+  {
+    "name": "detail-detail",
+    "path": "/detail/:detail?",
+    "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\detail\\\\_detail.vue",
+    "chunkName": "pages/detail/_detail"
   }
 ]

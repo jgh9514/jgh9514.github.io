@@ -7,3 +7,14 @@
 .v-dialog--fullscreen {
     overflow-y: hidden !important;
 }
+#__layout .v-menu {
+    display: block;
+}
+
+.orange {
+    background-color: rgb(255, 62, 0) !important;
+    border-color: rgb(255, 62, 0) !important;
+}
+.theme--light.v-pagination .v-pagination__item--active {
+    background: #000 !important;
+}

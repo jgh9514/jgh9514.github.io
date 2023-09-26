@@ -6,8 +6,8 @@ import scrollBehavior from './router.scrollBehavior.js'
 
 const _5f639c0a = () => interopDefault(import('..\\src\\pages\\addpopup.vue' /* webpackChunkName: "pages/addpopup" */))
 const _93f2ad8c = () => interopDefault(import('..\\src\\pages\\inspire.vue' /* webpackChunkName: "pages/inspire" */))
-const _05bb9af2 = () => interopDefault(import('..\\src\\pages\\detail\\detail.vue' /* webpackChunkName: "pages/detail/detail" */))
 const _5dd33532 = () => interopDefault(import('..\\src\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
+const _31a3409f = () => interopDefault(import('..\\src\\pages\\detail\\_detail.vue' /* webpackChunkName: "pages/detail/_detail" */))
 
 const emptyFn = () => {}
 
@@ -29,13 +29,13 @@ export const routerOptions = {
     component: _93f2ad8c,
     name: "inspire"
   }, {
-    path: "/detail/detail",
-    component: _05bb9af2,
-    name: "detail-detail"
-  }, {
     path: "/",
     component: _5dd33532,
     name: "index"
+  }, {
+    path: "/detail/:detail?",
+    component: _31a3409f,
+    name: "detail-detail"
   }],
 
   fallback: false

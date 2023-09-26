@@ -8,12 +8,9 @@
     >
       <v-card>
         <v-toolbar
-          dark
-          color="primary"
+          color="orange"
         >
           <v-btn
-            icon
-            dark
             @click="dialog = false"
           >
             <v-icon>mdi-close</v-icon>
@@ -130,7 +127,6 @@ export default {
           this.$toast.show('저장되었습니다.')
           this.close()
         }
-        console.log(res)
       })
     },
     close() {
@@ -210,9 +206,10 @@ export default {
   padding: 0;
 }
 #monsterList .v-list-item > div {
-  width: 33%;
-  flex: 1;
+  width: 25%;
+  flex: 1 1 auto;
   position: relative;
+  text-align: center;
 }
 #monsterList .v-list-item > div.active:after {
   content: "";

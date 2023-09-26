@@ -24,6 +24,7 @@ export default {
   css: [
     // '~/assets/font/font.css',
     '~/assets/css/design.css',
+    '~/assets/css/vuetify.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -50,8 +51,8 @@ export default {
   axios: {
     proxyHeaders: false,
     credentials: false,
-    // baseURL: 'http://localhost:8080',
-    baseURL: 'https://jgh9514.com',
+    baseURL: 'http://localhost:8080',
+    // baseURL: 'https://jgh9514.com',
   },
   proxy: {
   },

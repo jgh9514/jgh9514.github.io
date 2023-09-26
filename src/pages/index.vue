@@ -1,37 +1,29 @@
 <template>
   <div>
     <v-btn @click="add()">추가</v-btn>
-    <!-- <v-autocomplete
+    <v-autocomplete
       v-model="friends"
-      :disabled="isUpdating"
-      :items="people"
+      :items="monsterNameList"
       chips
       closable-chips
       color="blue-grey-lighten-2"
-      item-title="name"
-      item-value="name"
+      item-text="kr_name"
+      item-value="monster_id"
       label="Select"
       multiple
     >
       <template v-slot:chip="{ props, item }">
-        <v-chip
-          v-bind="props"
-          :prepend-avatar="item.raw.avatar"
-          :text="item.raw.name"
-        ></v-chip>
+        <v-chip v-bind="props" closable>{{ item }}</v-chip>
       </template>
-
-      <template v-slot:item="{ props, item }">
-        <v-list-item
-          v-bind="props"
-          :prepend-avatar="item?.raw?.avatar"
-          :title="item?.raw?.name"
-          :subtitle="item?.raw?.group"
-        ></v-list-item>
+      <template v-slot:item="{ item, props }">
+        <v-list-item v-bind="props">
+          <img :src="require(`../assets${item.image_url}`)" />
+          <v-list-item-title>{{ item.kr_name }}</v-list-item-title>
+        </v-list-item>
       </template>
-    </v-autocomplete> -->
+    </v-autocomplete>
     <v-container>
-      <v-row justify="center" align="center" id="monsterList">
+      <v-row justify="center" id="monsterList">
         <v-col cols="12">
           <v-row class="header">
             <v-col cols="6">
@@ -47,7 +39,7 @@
               패배
             </v-col>
           </v-row>
-          <v-row v-for="monster in monsterList" :key="monster.team_id">
+          <v-row v-for="monster in showMonsterList" :key="monster.team_id">
             <v-col cols="6" @click="goDetail(monster.team_id)">
               <img :src="require(`../assets${monster.image_url1}`)" />
               <img :src="require(`../assets${monster.image_url2}`)" />
@@ -66,6 +58,23 @@
         </v-col>
       </v-row>
     </v-container>
+    <div class="text-center">
+      <v-pagination
+        v-model="page"
+        :length="Math.floor(monsterList.length / schData.paging)"
+        :total-visible="8"
+        @input="pageChange('paging')"
+      ></v-pagination>
+      <v-select
+        v-model="schData.paging"
+        :items="listData"
+        item-text="cd_nm"
+        item-value="cd"
+        variant="outlined"
+        style="padding: 0 20px; width: 200px; float: right;"
+        @change="pageChange('select')"
+      ></v-select>
+    </div>
     <addpopup ref="addpopup" />
   </div>
 </template>
@@ -79,16 +88,24 @@ export default {
   },
   data () {
     return {
-      // loading: false,
       schData: {
-
+        paging: '5',
       },
       monsterList: [],
+      showMonsterList: [],
       monsterNameList: [],
+      friends: {},
+      page: 1,
+      listData: [
+        { cd: '5', cd_nm: '5개씩 보기'},
+        { cd: '10', cd_nm: '10개씩 보기'},
+        { cd: '15', cd_nm: '15개씩 보기'},
+      ]
     }
   },
   async mounted() {
     await this.search()
+    await this.pageChange()
   },
   methods: {
     async search() {
@@ -96,10 +113,9 @@ export default {
         this.monsterList = res.data
       })
       await this.$axios.get('/api/v1/summonerswar/monster-list', {params: this.schData}).then((res) => {
-        res.data.forEach(e => {
-          e.monster_
-        })
-        this.monsterNameList.push()
+        this.monsterNameList = res.data
+        console.log(this.monsterNameList)
+        this.friends[0] = this.monsterNameList[0]
       })
     },
     goDetail(team_id) {
@@ -113,6 +129,17 @@ export default {
     },
     add() {
       this.$refs.addpopup.open('bang')
+    },
+    pageChange(val) {
+      if (val === 'select') this.page = 1
+      const pageNumber = this.page * this.schData.paging
+      const start = pageNumber - this.schData.paging > 0 ? pageNumber - this.schData.paging : 0
+      const end = pageNumber - 1  < this.monsterList.length ? pageNumber - 1 : this.monsterList.length
+      this.showMonsterList = this.monsterList.filter((e, index) => {
+        if (start <= index && index <= end) {
+          return e
+        }
+      })
     },
   },
 }
