@@ -2,25 +2,31 @@
   {
     "name": "addpopup",
     "path": "/addpopup",
-    "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\addpopup.vue",
+    "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\jgh9514.github.io\\\\src\\\\pages\\\\addpopup.vue",
     "chunkName": "pages/addpopup"
   },
   {
     "name": "inspire",
     "path": "/inspire",
-    "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\inspire.vue",
+    "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\jgh9514.github.io\\\\src\\\\pages\\\\inspire.vue",
     "chunkName": "pages/inspire"
+  },
+  {
+    "name": "json-json",
+    "path": "/json/json",
+    "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\jgh9514.github.io\\\\src\\\\pages\\\\json\\\\json.vue",
+    "chunkName": "pages/json/json"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\index.vue",
+    "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\jgh9514.github.io\\\\src\\\\pages\\\\index.vue",
     "chunkName": "pages/index"
   },
   {
     "name": "detail-detail",
     "path": "/detail/:detail?",
-    "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\detail\\\\_detail.vue",
+    "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\jgh9514.github.io\\\\src\\\\pages\\\\detail\\\\_detail.vue",
     "chunkName": "pages/detail/_detail"
   }
 ]

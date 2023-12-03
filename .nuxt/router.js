@@ -4,10 +4,11 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _5f639c0a = () => interopDefault(import('..\\src\\pages\\addpopup.vue' /* webpackChunkName: "pages/addpopup" */))
-const _93f2ad8c = () => interopDefault(import('..\\src\\pages\\inspire.vue' /* webpackChunkName: "pages/inspire" */))
-const _5dd33532 = () => interopDefault(import('..\\src\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
-const _31a3409f = () => interopDefault(import('..\\src\\pages\\detail\\_detail.vue' /* webpackChunkName: "pages/detail/_detail" */))
+const _56801790 = () => interopDefault(import('..\\src\\pages\\addpopup.vue' /* webpackChunkName: "pages/addpopup" */))
+const _c535a946 = () => interopDefault(import('..\\src\\pages\\inspire.vue' /* webpackChunkName: "pages/inspire" */))
+const _cd0c19c6 = () => interopDefault(import('..\\src\\pages\\json\\json.vue' /* webpackChunkName: "pages/json/json" */))
+const _1e21e415 = () => interopDefault(import('..\\src\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
+const _3e8a207c = () => interopDefault(import('..\\src\\pages\\detail\\_detail.vue' /* webpackChunkName: "pages/detail/_detail" */))
 
 const emptyFn = () => {}
 
@@ -22,19 +23,23 @@ export const routerOptions = {
 
   routes: [{
     path: "/addpopup",
-    component: _5f639c0a,
+    component: _56801790,
     name: "addpopup"
   }, {
     path: "/inspire",
-    component: _93f2ad8c,
+    component: _c535a946,
     name: "inspire"
   }, {
+    path: "/json/json",
+    component: _cd0c19c6,
+    name: "json-json"
+  }, {
     path: "/",
-    component: _5dd33532,
+    component: _1e21e415,
     name: "index"
   }, {
     path: "/detail/:detail?",
-    component: _31a3409f,
+    component: _3e8a207c,
     name: "detail-detail"
   }],
 

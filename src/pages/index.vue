@@ -1,6 +1,5 @@
 <template>
   <div>
-    <v-btn @click="add()">추가</v-btn>
     <v-autocomplete
       v-model="friends"
       :items="monsterNameList"
@@ -23,6 +22,8 @@
       </template>
     </v-autocomplete>
     <v-container>
+      <v-btn @click="json()">json 추가</v-btn>
+      <v-btn @click="add()">추가</v-btn>
       <v-row justify="center" id="monsterList">
         <v-col cols="12">
           <v-row class="header">
@@ -39,20 +40,20 @@
               패배
             </v-col>
           </v-row>
-          <v-row v-for="monster in showMonsterList" :key="monster.team_id">
-            <v-col cols="6" @click="goDetail(monster.team_id)">
+          <v-row v-for="monster in showMonsterList" :key="monster.key">
+            <v-col cols="6" @click="goDetail(monster)">
               <img :src="require(`../assets${monster.image_url1}`)" />
               <img :src="require(`../assets${monster.image_url2}`)" />
               <img :src="require(`../assets${monster.image_url3}`)" />
             </v-col>
             <v-col cols="2">
-              {{ monster.rate }}
+              {{ monster.total_rate }}
             </v-col>
             <v-col cols="2">
-              {{ monster.victory_count }}
+              {{ monster.win_count }}
             </v-col>
             <v-col cols="2">
-              {{ monster.defeat_count }}
+              {{ monster.lose_count }}
             </v-col>
           </v-row>
         </v-col>
@@ -118,17 +119,24 @@ export default {
         this.friends[0] = this.monsterNameList[0]
       })
     },
-    goDetail(team_id) {
+    goDetail(monster) {
       this.$router.push({
         name: 'detail-detail',
         params: {
-          detail: team_id,
-          team_id: team_id,
+          detail: monster.key,
+          dm1: monster.dm1,
+          dm2: monster.dm2,
+          dm3: monster.dm3,
         },
       })
     },
     add() {
       this.$refs.addpopup.open('bang')
+    },
+    json() {
+      this.$router.push({
+        name: 'json-json',
+      })
     },
     pageChange(val) {
       if (val === 'select') this.page = 1

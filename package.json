@@ -24,6 +24,7 @@
     "nuxt": "^2.16.1",
     "vue": "^2.7.14",
     "vue-router-tab": "^1.2.0",
+    "vue-upload-component": "^2.8.23",
     "vuetify-confirm": "^2.0.6"
   },
   "devDependencies": {

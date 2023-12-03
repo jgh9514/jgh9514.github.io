@@ -36,7 +36,7 @@
         </v-row>
         <v-row class="baseInfo">
           <v-col cols="3">
-            <p class="data">{{ data.rate }}</p>
+            <p class="data">{{ data.total_rate }}</p>
             <p>공성률</p>
           </v-col>
           <v-col cols="3">
@@ -44,11 +44,11 @@
             <p>총 게임 수</p>
           </v-col>
           <v-col cols="3">
-            <p class="data">{{ data.victory_count }}</p>
+            <p class="data">{{ data.win_count }}</p>
             <p>승리 수</p>
           </v-col>
           <v-col cols="3">
-            <p class="data">{{ data.defeat_count }}</p>
+            <p class="data">{{ data.lose_count }}</p>
             <p>패배 수</p>
           </v-col>
         </v-row>
@@ -75,10 +75,10 @@
                 <img :src="require(`../../assets${monster.image_url3}`)" />
               </v-col>
               <v-col cols="6" style="padding-left: 0;">
-                <p>{{ monster.victory_count / monster.total_count * 100 }}%</p>
+                <p>{{ monster.win_count / monster.total_count * 100 }}%</p>
                 <v-progress-linear 
                   color="orange" 
-                  :value="monster.victory_count / monster.total_count * 100" 
+                  :value="monster.win_count / monster.total_count * 100" 
                   height="10">
                 </v-progress-linear>
               </v-col>
@@ -111,8 +111,12 @@ export default {
     }
   },
   async mounted() {
+    console.log(this.$route.params.dm1)
     if (this.$route.params.detail != undefined) {
       this.schData.team_id = this.$route.params.detail
+      this.schData.dm1 = this.$route.params.dm1
+      this.schData.dm2 = this.$route.params.dm2
+      this.schData.dm3 = this.$route.params.dm3
     }
     await this.search()
   },
