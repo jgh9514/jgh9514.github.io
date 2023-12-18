@@ -47,7 +47,7 @@
               <img :src="require(`../assets${monster.image_url3}`)" />
             </v-col>
             <v-col cols="2">
-              {{ monster.total_rate }}
+              {{ monster.total_rate + '%' }}
             </v-col>
             <v-col cols="2">
               {{ monster.win_count }}

@@ -36,7 +36,7 @@
         </v-row>
         <v-row class="baseInfo">
           <v-col cols="3">
-            <p class="data">{{ data.total_rate }}</p>
+            <p class="data">{{ data.total_rate + '%'}}</p>
             <p>공성률</p>
           </v-col>
           <v-col cols="3">
@@ -75,7 +75,7 @@
                 <img :src="require(`../../assets${monster.image_url3}`)" />
               </v-col>
               <v-col cols="6" style="padding-left: 0;">
-                <p>{{ monster.win_count / monster.total_count * 100 }}%</p>
+                <p>{{ monster.total_rate + '%' }}<span style="float: right;">{{ '(' + monster.win_count + '승 ' + monster.lose_count + '패)' }}</span></p>
                 <v-progress-linear 
                   color="orange" 
                   :value="monster.win_count / monster.total_count * 100" 
@@ -111,13 +111,11 @@ export default {
     }
   },
   async mounted() {
-    console.log(this.$route.params.dm1)
-    if (this.$route.params.detail != undefined) {
-      this.schData.team_id = this.$route.params.detail
-      this.schData.dm1 = this.$route.params.dm1
-      this.schData.dm2 = this.$route.params.dm2
-      this.schData.dm3 = this.$route.params.dm3
-    }
+    this.schData.team_id = this.$route.params.detail
+    const dm = this.$route.params.detail.split("-")
+    this.schData.dm1 = dm[0]
+    this.schData.dm2 = dm[1]
+    this.schData.dm3 = dm[2]
     await this.search()
   },
   methods: {
@@ -164,12 +162,13 @@ export default {
 #monsterList .title {
   display: flex;
   flex-direction: row;
-  padding: 9px 5.33%;
+  padding: 9px 0;
   height: 50px;
   border-bottom: solid rgba(56, 56, 56, 0.3);
   box-sizing: border-box;
   width: calc(100% - 20px);
   margin: 0 auto;
+  align-items: center;
 }
 #monsterList > .row {
     box-shadow: 0 0 10px rgba(58,57,165,.1);
@@ -231,12 +230,13 @@ export default {
 #TeamAnalysis .title {
   display: flex;
   flex-direction: row;
-  padding: 9px 5.33%;
+  padding: 9px 0;
   height: 50px;
   border-bottom: solid rgba(56, 56, 56, 0.3);
   box-sizing: border-box;
   width: calc(100% - 20px);
   margin: 0 auto;
+  align-items: center;
 }
 #TeamAnalysis .TeamAnalysis_body {
   display: flex;
