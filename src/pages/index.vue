@@ -1,29 +1,31 @@
 <template>
   <div>
-    <v-autocomplete
-      v-model="friends"
-      :items="monsterNameList"
-      chips
-      closable-chips
-      color="blue-grey-lighten-2"
-      item-text="kr_name"
-      item-value="monster_id"
-      label="Select"
-      multiple
-    >
-      <template v-slot:chip="{ props, item }">
-        <v-chip v-bind="props" closable>{{ item }}</v-chip>
-      </template>
-      <template v-slot:item="{ item, props }">
-        <v-list-item v-bind="props">
-          <img :src="require(`../assets${item.image_url}`)" />
-          <v-list-item-title>{{ item.kr_name }}</v-list-item-title>
-        </v-list-item>
-      </template>
-    </v-autocomplete>
+    <template>
+      <v-card color="blue-grey-darken-1" class="mx-auto" max-width="420">
+        <v-autocomplete v-model="selectMonster" :items="monsterNameList" chips multiple item-text="kr_name" item-value="monster_id" close-text>
+          <template #selection="{ item, attrs, selected, select }">
+            <v-chip v-bind="attrs" :input-value="selected" close @click="select" @click:close="remove(item.monster_id)">
+              <v-img :width="16" aspect-ratio="16/9" cover :src="require(`../assets${item.image_url}`)" style="float: left; height: 16px"></v-img>
+              {{ item.kr_name }}
+            </v-chip>
+          </template>
+          <template #item="{ item, on, attrs }">
+            <v-list-item v-bind="attrs" v-on="on">
+              <v-list-item-content>
+                <v-list-item-title>
+                  <v-img :width="30" aspect-ratio="16/9" cover :src="require(`../assets${item.image_url}`)" style="float: left; height: 30px"></v-img>
+                  {{ item.kr_name }}<br />{{ item.un_name }}
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </template>
+        </v-autocomplete>
+      </v-card>
+    </template>
     <v-container>
       <v-btn @click="json()">json 추가</v-btn>
       <v-btn @click="add()">추가</v-btn>
+      <v-btn @click="search()">검색</v-btn>
       <v-row justify="center" id="monsterList">
         <v-col cols="12">
           <v-row class="header">
@@ -92,6 +94,7 @@ export default {
       schData: {
         paging: '5',
       },
+      selectMonster: [],
       monsterList: [],
       showMonsterList: [],
       monsterNameList: [],
@@ -104,12 +107,21 @@ export default {
       ]
     }
   },
+  computed: {
+    wkplIcon() {
+      if (this.likesAllwkpl) return 'mdi-close-box'
+      if (this.likesSomewkpl) return 'mdi-minus-box'
+      return 'mdi-checkbox-blank-outline'
+    },
+  },
   async mounted() {
     await this.search()
-    await this.pageChange()
   },
   methods: {
     async search() {
+      this.schData.monster_id1 = this.selectMonster[0]
+      this.schData.monster_id2 = this.selectMonster[1]
+      this.schData.monster_id3 = this.selectMonster[2]
       await this.$axios.get('/api/v1/summonerswar/enemyTeam-list', {params: this.schData}).then((res) => {
         this.monsterList = res.data
       })
@@ -118,6 +130,7 @@ export default {
         console.log(this.monsterNameList)
         this.friends[0] = this.monsterNameList[0]
       })
+      this.pageChange()
     },
     goDetail(monster) {
       this.$router.push({
@@ -147,6 +160,11 @@ export default {
         if (start <= index && index <= end) {
           return e
         }
+      })
+    },
+    remove(monster_id) {
+      this.selectMonster = this.selectMonster.filter((e) => {
+        return e !== monster_id
       })
     },
   },
@@ -183,5 +201,10 @@ export default {
     border: 2px solid #fff;
     border-radius: 50%;
     box-sizing: border-box;
+}
+</style>
+<style>
+.v-list-item--active {
+  background: #f00 !important;
 }
 </style>
