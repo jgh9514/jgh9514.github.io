@@ -16,13 +16,13 @@
           <v-col cols="12">
             <v-row>
               <v-col cols="4">
-                <img :src="require(`../../assets${data.image_url1}`)" />
+                <img v-if="data.image_url1 != undefined" :src="require(`../../assets${data.image_url1}`)" />
               </v-col>
               <v-col cols="4">
-                <img :src="require(`../../assets${data.image_url2}`)" />
+                <img v-if="data.image_url2 != undefined" :src="require(`../../assets${data.image_url2}`)" />
               </v-col>
               <v-col cols="4">
-                <img :src="require(`../../assets${data.image_url3}`)" />
+                <img v-if="data.image_url3 != undefined" :src="require(`../../assets${data.image_url3}`)" />
               </v-col>
             </v-row>
           </v-col>
