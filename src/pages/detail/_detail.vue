@@ -175,7 +175,7 @@ export default {
     border-radius: 4px;
 }
 #monsterList .col-12 .row {
-  display: table;
+  display: flex;
   margin: 0 auto;
 }
 
@@ -185,6 +185,7 @@ export default {
   padding: 0 10px;
 }
 #monsterList img {
+  width: 100%;
   border-radius: 5px;
   border: 4px solid #d79f34;
 }
