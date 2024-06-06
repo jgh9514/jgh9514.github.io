@@ -70,9 +70,9 @@
           <v-col cols="12" class="TeamAnalysis_body">
             <v-row v-for="monster in teamList" :key="monster.team_id">
               <v-col cols="6">
-                <img :src="require(`../../assets${monster.image_url1}`)" />
-                <img :src="require(`../../assets${monster.image_url2}`)" />
-                <img :src="require(`../../assets${monster.image_url3}`)" />
+                <img v-if="monster.image_url1 != undefined" :src="require(`../../assets${monster.image_url1}`)" />
+                <img v-if="monster.image_url2 != undefined" :src="require(`../../assets${monster.image_url2}`)" />
+                <img v-if="monster.image_url3 != undefined" :src="require(`../../assets${monster.image_url3}`)" />
               </v-col>
               <v-col cols="6" style="padding-left: 0;">
                 <p>{{ monster.total_rate + '%' }}<span style="float: right;">{{ '(' + monster.win_count + '승 ' + monster.lose_count + '패)' }}</span></p>
