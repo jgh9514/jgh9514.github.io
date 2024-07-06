@@ -1,4 +1,5 @@
 {
+
   "homepage": "https://github.com/jgh9514/jgh9514.github.io.git",
   "name": "summonerswar",
   "version": "1.0.0",
@@ -10,28 +11,48 @@
     "generate": "nuxt generate",
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint": "npm run lint:js",
-    "test": "jest",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
-    "clean": "gh-pages-clean"
+    "test": "jest"
   },
   "dependencies": {
+    "@capacitor-community/barcode-scanner": "^4.0.1",
+    "@capacitor-community/file-opener": "^1.0.6",
+    "@capacitor/android": "^5.0.0",
+    "@capacitor/app": "^5.0.0",
+    "@capacitor/camera": "^5.0.0",
+    "@capacitor/cli": "^5.0.0",
+    "@capacitor/core": "^5.0.0",
+    "@capacitor/device": "^5.0.0",
+    "@capacitor/filesystem": "^5.0.0",
+    "@capacitor/ios": "^5.0.0",
+    "@capacitor/push-notifications": "^5.0.0",
     "@js-joda/core": "^3.2.0",
-    "@js-joda/timezone": "^2.5.0",
-    "@nuxtjs/axios": "^5.13.6",
-    "@nuxtjs/i18n": "^7.3.1",
+    "@js-joda/timezone": "^2.18.2",
+    "@nuxtjs/axios": "^5.12.0",
     "@nuxtjs/toast": "^3.3.1",
-    "nuxt": "^2.16.1",
-    "vue": "^2.7.14",
+    "capacitor-blob-writer": "^1.1.16",
+    "capacitor-video-player": "^5.5.1",
+    "chart.js": "^2.9.4",
+    "chartjs-plugin-datalabels": "^0.7.0",
+    "html5-qrcode": "^2.1.2",
+    "mobile-detect": "^1.4.5",
+    "nuxt": "^2.14.0",
+    "patch-package": "^6.4.7",
+    "realgrid": "^2.7.2",
+    "vue": "^2.7.16",
+    "vue-chartjs": "^3.5.1",
+    "vue-qrcode-reader": "^3.0.6",
+    "vue-quill-editor": "^3.0.6",
     "vue-router-tab": "^1.2.0",
-    "vue-upload-component": "^2.8.23",
+    "vue-signature-pad": "^2.0.5",
+    "vue-template-compiler": "^2.1.8",
+    "vue-upload-component": "^2.8.20",
     "vuetify-confirm": "^2.0.6"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.1.0",
     "@nuxtjs/eslint-module": "^2.0.0",
     "@nuxtjs/vuetify": "^1.12.3",
-    "@vue/test-utils": "1.0.3",
+    "@vue/test-utils": "^1.3.6",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.1.0",
@@ -39,8 +60,16 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-nuxt": "^1.0.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "gh-pages": "^6.0.0",
+    "jest": "^26.1.0",
     "prettier": "^2.0.5",
-    "vue-jest": "^3.0.4"
-  }
+    "vue-jest": "^3.0.7"
+  },
+  "scripts:": {
+    "browserslist": "browserslist"
+  },
+  "browserslist": [
+    "last 2 version",
+    "android >= 4.4",
+    "IE >= 10"
+  ]
 }

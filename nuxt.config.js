@@ -15,47 +15,39 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { ref: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' },
-      { ref: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' },
-      { ref: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.4.95/css/materialdesignicons.min.css' },
-      { ref: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAND248,400,0,0' },
     ]
   },
 
   css: [
-    // '~/assets/font/font.css',
     '~/assets/css/design.css',
     '~/assets/css/vuetify.css',
   ],
 
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/axios',
+    '~/plugins/routerTab',
   ],
 
   loading: '~/components/LoadingBar.vue',
-  // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/eslint-module',
     '@nuxtjs/vuetify',
   ],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/toast',
-    '@nuxtjs/i18n',
   ],
   axios: {
     proxyHeaders: false,
     credentials: false,
+    withCredentials: true,
     // baseURL: 'http://localhost:8080',
     baseURL: 'https://jgh9514.com',
   },
-  proxy: {
-  },
+  proxy: {},
   i18n: {
     locales: ['ko'],
     deefaultLocale: 'ko',
@@ -70,9 +62,7 @@ export default {
     },
   },
 
-  // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
-    // customVariables: ['~/assets/variables.scss'],
     theme: {
       dark: false,
       default: 'light',
@@ -107,7 +97,6 @@ export default {
     }
   },
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ['vue-router-tab'],
     parallel: true,
