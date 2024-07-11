@@ -1,23 +1,54 @@
 <template>
   <div>
-    
     <v-container>
       <v-row>
         <v-col cols="9">
           <template>
             <v-card color="blue-grey-darken-1" class="mx-auto" max-width="420">
-              <v-autocomplete v-model="selectMonster" :items="monsterNameList" chips multiple item-text="kr_name" item-value="monster_id" close-text>
+              <v-autocomplete
+                v-model="selectMonster"
+                :items="monsterNameList"
+                chips
+                multiple
+                item-text="kr_name"
+                item-value="monster_id"
+                close-text
+                hide-details
+                :search-input.sync="searchText"
+              >
                 <template #selection="{ item, attrs, selected, select }">
-                  <v-chip v-bind="attrs" :input-value="selected" close @click="select" @click:close="remove(item.monster_id)">
-                    <v-img :width="16" aspect-ratio="16/9" cover :src="require(`../assets${item.image_url}`)" style="float: left; height: 16px"></v-img>
+                  <v-chip
+                    v-bind="attrs"
+                    :input-value="selected"
+                    close
+                    @click="select"
+                    @click:close="remove(item.monster_id)"
+                  >
+                    <v-img
+                      :width="16"
+                      aspect-ratio="16/9"
+                      cover
+                      :src="require(`../assets${item.image_url}`)"
+                      style="float: left; height: 16px"
+                    ></v-img>
                     {{ item.kr_name }}
                   </v-chip>
                 </template>
                 <template #item="{ item, on, attrs }">
-                  <v-list-item v-bind="attrs" v-on="on">
+                  <v-list-item
+                    v-bind="attrs"
+                    v-on="on"
+                    @click="clearSearchText"
+                  >
                     <v-list-item-content>
                       <v-list-item-title>
-                        <v-img :width="30" aspect-ratio="16/9" cover :src="require(`../assets${item.image_url}`)" style="float: left; height: 30px"></v-img>
+                        <v-img
+                          :width="30"
+                          aspect-ratio="16/9"
+                          cover
+                          :src="require(`../assets${item.image_url}`)"
+                          style="float: left; height: 30px"
+                        ></v-img>
                         {{ item.kr_name }}<br />{{ item.un_name }}
                       </v-list-item-title>
                     </v-list-item-content>
@@ -38,27 +69,28 @@
       <v-row justify="center" id="monsterList">
         <v-col cols="12">
           <v-row class="header">
-            <v-col cols="6">
-              방덱 리스트
-            </v-col>
-            <v-col cols="2">
-              승률
-            </v-col>
-            <v-col cols="2">
-              승리
-            </v-col>
-            <v-col cols="2">
-              패배
-            </v-col>
+            <v-col cols="6"> 방덱 리스트 </v-col>
+            <v-col cols="2"> 승률 </v-col>
+            <v-col cols="2"> 승리 </v-col>
+            <v-col cols="2"> 패배 </v-col>
           </v-row>
           <v-row v-for="monster in showMonsterList" :key="monster.key">
             <v-col cols="6" @click="goDetail(monster)">
-              <img v-if="monster.image_url1 != undefined" :src="require(`../assets${monster.image_url1}`)" />
-              <img v-if="monster.image_url2 != undefined" :src="require(`../assets${monster.image_url2}`)" />
-              <img v-if="monster.image_url3 != undefined" :src="require(`../assets${monster.image_url3}`)" />
+              <img
+                v-if="monster.image_url1 != undefined"
+                :src="require(`../assets${monster.image_url1}`)"
+              />
+              <img
+                v-if="monster.image_url2 != undefined"
+                :src="require(`../assets${monster.image_url2}`)"
+              />
+              <img
+                v-if="monster.image_url3 != undefined"
+                :src="require(`../assets${monster.image_url3}`)"
+              />
             </v-col>
             <v-col cols="2">
-              {{ monster.total_rate + '%' }}
+              {{ monster.total_rate + "%" }}
             </v-col>
             <v-col cols="2">
               {{ monster.win_count }}
@@ -83,7 +115,7 @@
         item-text="cd_nm"
         item-value="cd"
         variant="outlined"
-        style="padding: 0 20px; width: 200px; float: right;"
+        style="padding: 0 20px; width: 200px; float: right"
         @change="pageChange('select')"
       ></v-select>
     </div>
@@ -92,93 +124,118 @@
 </template>
 
 <script>
-import addpopup from './addpopup.vue'
+import addpopup from "./addpopup.vue";
 
 export default {
   components: {
     addpopup,
   },
-  data () {
+  data() {
     return {
       schData: {
-        paging: '5',
+        paging: "5",
       },
       selectMonster: [],
       monsterList: [],
       showMonsterList: [],
       monsterNameList: [],
       friends: {},
+      searchText: "",
       page: 1,
       listData: [
-        { cd: '5', cd_nm: '5개씩 보기'},
-        { cd: '10', cd_nm: '10개씩 보기'},
-        { cd: '15', cd_nm: '15개씩 보기'},
-      ]
-    }
+        { cd: "5", cd_nm: "5개씩 보기" },
+        { cd: "10", cd_nm: "10개씩 보기" },
+        { cd: "15", cd_nm: "15개씩 보기" },
+      ],
+    };
   },
   computed: {
     wkplIcon() {
-      if (this.likesAllwkpl) return 'mdi-close-box'
-      if (this.likesSomewkpl) return 'mdi-minus-box'
-      return 'mdi-checkbox-blank-outline'
+      if (this.likesAllwkpl) return "mdi-close-box";
+      if (this.likesSomewkpl) return "mdi-minus-box";
+      return "mdi-checkbox-blank-outline";
+    },
+  },
+  watch: {
+    selectMonster(newVal) {
+      if (newVal.length > 3) {
+        this.$toast.error("최대 3개까지 선택할 수 있습니다.");
+        this.selectMonster = newVal.slice(0, 3);
+      }
     },
   },
   async mounted() {
-    await this.search()
+    await this.search();
   },
   methods: {
+    clearSearchText() {
+      this.$nextTick(() => {
+        this.searchText = "";
+      });
+      // console.log(this.$refs.testaaa.reset())
+    },
     async search() {
-      this.schData.monster_id1 = this.selectMonster[0]
-      this.schData.monster_id2 = this.selectMonster[1]
-      this.schData.monster_id3 = this.selectMonster[2]
-      await this.$axios.get('/api/v1/summonerswar/enemyTeam-list', {params: this.schData}).then((res) => {
-        this.monsterList = res.data
-      })
-      await this.$axios.get('/api/v1/summonerswar/monster-list', {params: this.schData}).then((res) => {
-        this.monsterNameList = res.data
-        console.log(this.monsterNameList)
-        this.friends[0] = this.monsterNameList[0]
-      })
-      this.pageChange()
+      this.schData.monster_id1 = this.selectMonster[0];
+      this.schData.monster_id2 = this.selectMonster[1];
+      this.schData.monster_id3 = this.selectMonster[2];
+      await this.$axios
+        .get("/api/v1/summonerswar/enemyTeam-list", { params: this.schData })
+        .then((res) => {
+          this.monsterList = res.data;
+        });
+      await this.$axios
+        .get("/api/v1/summonerswar/monster-list", { params: this.schData })
+        .then((res) => {
+          this.monsterNameList = res.data;
+          console.log(this.monsterNameList);
+          this.friends[0] = this.monsterNameList[0];
+        });
+      this.pageChange();
     },
     goDetail(monster) {
       this.$router.push({
-        name: 'detail-detail',
+        name: "detail-detail",
         params: {
           detail: monster.key,
           dm1: monster.dm1,
           dm2: monster.dm2,
           dm3: monster.dm3,
         },
-      })
+      });
     },
     add() {
-      this.$refs.addpopup.open('bang')
+      this.$refs.addpopup.open("bang");
     },
     json() {
       this.$router.push({
-        name: 'json-json',
-      })
+        name: "json-json",
+      });
     },
     pageChange(val) {
-      if (val === 'select') this.page = 1
-      const pageNumber = this.page * this.schData.paging
-      const start = pageNumber - this.schData.paging > 0 ? pageNumber - this.schData.paging : 0
-      const end = pageNumber - 1  < this.monsterList.length ? pageNumber - 1 : this.monsterList.length
+      if (val === "select") this.page = 1;
+      const pageNumber = this.page * this.schData.paging;
+      const start =
+        pageNumber - this.schData.paging > 0
+          ? pageNumber - this.schData.paging
+          : 0;
+      const end =
+        pageNumber - 1 < this.monsterList.length
+          ? pageNumber - 1
+          : this.monsterList.length;
       this.showMonsterList = this.monsterList.filter((e, index) => {
         if (start <= index && index <= end) {
-          return e
+          return e;
         }
-      })
-      console.log(this.showMonsterList)
+      });
+      console.log(this.showMonsterList);
     },
     remove(monster_id) {
       this.selectMonster = this.selectMonster.filter((e) => {
-        return e !== monster_id
-      })
+        return e !== monster_id;
+      });
     },
   },
-}
+};
 </script>
 <style scoped>
 #monsterList .header {
@@ -193,7 +250,7 @@ export default {
   text-align: center;
   color: #000;
   background-color: #fff;
-  box-shadow: 0 0 10px rgba(58,57,165,.1);
+  box-shadow: 0 0 10px rgba(58, 57, 165, 0.1);
   border-radius: 4px;
 }
 #monsterList .row .col {
@@ -202,15 +259,15 @@ export default {
   float: left;
 }
 #monsterList img:first-child {
-    margin-left: 0 !important;
+  margin-left: 0 !important;
 }
 #monsterList img {
-    float: left;
-    margin-left: -10px;
-    width: 33.3%;
-    border: 2px solid #fff;
-    border-radius: 50%;
-    box-sizing: border-box;
+  float: left;
+  margin-left: -10px;
+  width: 33.3%;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-sizing: border-box;
 }
 </style>
 <style>

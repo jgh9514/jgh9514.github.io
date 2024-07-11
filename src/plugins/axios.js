@@ -1,7 +1,5 @@
 export default function ({ $axios, redirect, store }) {
     $axios.onRequest((config) => {
-        config.withCredntials = true
-
         store._vm.$nextTick(() => {
             store._vm.$nuxt.$loading.start()
             return config
@@ -10,7 +8,7 @@ export default function ({ $axios, redirect, store }) {
 
     $axios.onResponse((response) => {
         store._vm.$nextTick(() => {
-            store._vm.$next.$loading.finish()
+            store._vm.$nuxt.$loading.finish()
 
             return response
         })

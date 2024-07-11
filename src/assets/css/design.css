@@ -18,3 +18,13 @@
 .theme--light.v-pagination .v-pagination__item--active {
     background: #000 !important;
 }
+.file-uploads {
+    width: 100%;
+}
+.v-select.v-select--chips .v-select__selections {
+    box-sizing: border-box;
+    padding: 0 5px;
+}
+.v-list-item::after {
+    display: none;
+}
