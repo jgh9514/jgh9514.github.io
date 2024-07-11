@@ -16,13 +16,13 @@
           <v-col cols="12">
             <v-row>
               <v-col cols="4">
-                <img :src="require(`../../assets${data.image_url1}`)" />
+                <img v-if="data.image_url1 != undefined" :src="require(`../../assets${data.image_url1}`)" />
               </v-col>
               <v-col cols="4">
-                <img :src="require(`../../assets${data.image_url2}`)" />
+                <img v-if="data.image_url2 != undefined" :src="require(`../../assets${data.image_url2}`)" />
               </v-col>
               <v-col cols="4">
-                <img :src="require(`../../assets${data.image_url3}`)" />
+                <img v-if="data.image_url3 != undefined" :src="require(`../../assets${data.image_url3}`)" />
               </v-col>
             </v-row>
           </v-col>
@@ -70,9 +70,9 @@
           <v-col cols="12" class="TeamAnalysis_body">
             <v-row v-for="monster in teamList" :key="monster.team_id">
               <v-col cols="6">
-                <img :src="require(`../../assets${monster.image_url1}`)" />
-                <img :src="require(`../../assets${monster.image_url2}`)" />
-                <img :src="require(`../../assets${monster.image_url3}`)" />
+                <img v-if="monster.image_url1 != undefined" :src="require(`../../assets${monster.image_url1}`)" />
+                <img v-if="monster.image_url2 != undefined" :src="require(`../../assets${monster.image_url2}`)" />
+                <img v-if="monster.image_url3 != undefined" :src="require(`../../assets${monster.image_url3}`)" />
               </v-col>
               <v-col cols="6" style="padding-left: 0;">
                 <p>{{ monster.total_rate + '%' }}<span style="float: right;">{{ '(' + monster.win_count + '승 ' + monster.lose_count + '패)' }}</span></p>
@@ -176,7 +176,15 @@ export default {
 }
 #monsterList .col-12 .row {
   display: flex;
-  margin: 0 auto;
+  align-items: center;
+  width: 100%;
+  margin: 10px auto;
+  font-size: 12px;
+  text-align: center;
+  color: #000;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(58,57,165,.1);
+  border-radius: 4px;
 }
 
 #monsterList .col-4 {
