@@ -38,6 +38,7 @@
     "html5-qrcode": "^2.1.2",
     "mobile-detect": "^1.4.5",
     "nuxt": "^2.14.0",
+    "vue": "^2.7.16",
     "patch-package": "^6.4.7",
     "vue-chartjs": "^3.5.1",
     "vue-quill-editor": "^3.0.6",
