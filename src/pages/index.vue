@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container>
-      <v-row>
+      <v-row style="align-items: center;">
         <v-col cols="9">
           <template>
             <v-card color="blue-grey-darken-1" class="mx-auto" max-width="420">
@@ -59,13 +59,12 @@
           </template>
         </v-col>
         <v-col cols="3">
-          <v-btn @click="search()">검색</v-btn>
+          <v-btn @click="search()" style="height: 54px; width: 100%;">검색</v-btn>
         </v-col>
       </v-row>
     </v-container>
     <v-container>
-      <v-btn @click="json()">json 추가</v-btn>
-      <v-btn @click="add()">추가</v-btn>
+      <v-btn v-if="false" @click="add()">추가</v-btn>
       <v-row justify="center" id="monsterList">
         <v-col cols="12">
           <v-row class="header">
@@ -139,7 +138,6 @@ export default {
       monsterList: [],
       showMonsterList: [],
       monsterNameList: [],
-      friends: {},
       searchText: "",
       page: 1,
       listData: [
@@ -165,6 +163,7 @@ export default {
     },
   },
   async mounted() {
+    await this.getMonsterList();
     await this.search();
   },
   methods: {
@@ -174,6 +173,13 @@ export default {
       });
       // console.log(this.$refs.testaaa.reset())
     },
+    getMonsterList() {
+      this.$axios
+        .get("/api/v1/summonerswar/monster-list", { params: this.schData })
+        .then((res) => {
+          this.monsterNameList = res.data;
+        });
+    },
     async search() {
       this.schData.monster_id1 = this.selectMonster[0];
       this.schData.monster_id2 = this.selectMonster[1];
@@ -182,13 +188,6 @@ export default {
         .get("/api/v1/summonerswar/enemyTeam-list", { params: this.schData })
         .then((res) => {
           this.monsterList = res.data;
-        });
-      await this.$axios
-        .get("/api/v1/summonerswar/monster-list", { params: this.schData })
-        .then((res) => {
-          this.monsterNameList = res.data;
-          console.log(this.monsterNameList);
-          this.friends[0] = this.monsterNameList[0];
         });
       this.pageChange();
     },
