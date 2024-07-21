@@ -3,36 +3,42 @@
     "name": "addpopup",
     "path": "/addpopup",
     "component": "C:\\\\Users\\\\g\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\addpopup.vue",
-    "chunkName": "pages/addpopup"
+    "chunkName": "pages/addpopup",
+    "_name": "_69266c01"
   },
   {
     "name": "login",
     "path": "/login",
     "component": "C:\\\\Users\\\\g\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\login.vue",
-    "chunkName": "pages/login"
+    "chunkName": "pages/login",
+    "_name": "_745e4c03"
   },
   {
     "name": "recent",
     "path": "/recent",
     "component": "C:\\\\Users\\\\g\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\recent\\\\index.vue",
-    "chunkName": "pages/recent/index"
+    "chunkName": "pages/recent/index",
+    "_name": "_4b04a39e"
   },
   {
     "name": "json-json",
     "path": "/json/json",
     "component": "C:\\\\Users\\\\g\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\json\\\\json.vue",
-    "chunkName": "pages/json/json"
+    "chunkName": "pages/json/json",
+    "_name": "_a3bcc6b4"
   },
   {
     "name": "index",
     "path": "/",
     "component": "C:\\\\Users\\\\g\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_aa92ae28"
   },
   {
     "name": "detail-detail",
     "path": "/detail/:detail?",
     "component": "C:\\\\Users\\\\g\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\detail\\\\_detail.vue",
-    "chunkName": "pages/detail/_detail"
+    "chunkName": "pages/detail/_detail",
+    "_name": "_2d86584e"
   }
 ]
