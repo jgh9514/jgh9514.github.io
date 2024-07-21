@@ -154,12 +154,15 @@ export function resolveRouteComponents (route, fn) {
             window.sessionStorage
           ) {
             const timeNow = Date.now()
-            const previousReloadTime = parseInt(window.sessionStorage.getItem('nuxt-reload'))
-
-            // check for previous reload time not to reload infinitely
-            if (!previousReloadTime || previousReloadTime + 60000 < timeNow) {
-              window.sessionStorage.setItem('nuxt-reload', timeNow)
-              window.location.reload(true /* skip cache */)
+            try {
+              const previousReloadTime = parseInt(window.sessionStorage.getItem('nuxt-reload'))
+              // check for previous reload time not to reload infinitely
+              if (!previousReloadTime || previousReloadTime + 60000 < timeNow) {
+                window.sessionStorage.setItem('nuxt-reload', timeNow)
+                window.location.reload(true /* skip cache */)
+              }
+            } catch {
+              // don't throw an error if we have issues reading sessionStorage
             }
           }
 
@@ -192,7 +195,7 @@ export async function setContext (app, context) {
   if (!app.context) {
     app.context = {
       isStatic: process.static,
-      isDev: true,
+      isDev: false,
       isHMR: false,
       app,
 
@@ -283,7 +286,7 @@ export async function setContext (app, context) {
   app.context.next = context.next
   app.context._redirected = false
   app.context._errored = false
-  app.context.isHMR = Boolean(context.isHMR)
+  app.context.isHMR = false
   app.context.params = app.context.route.params || {}
   app.context.query = app.context.route.query || {}
 }
@@ -301,9 +304,6 @@ export function middlewareSeries (promises, appContext, renderState) {
 export function promisify (fn, context) {
   let promise
   if (fn.length === 2) {
-      console.warn('Callback-based asyncData, fetch or middleware calls are deprecated. ' +
-        'Please switch to promises or async/await syntax')
-
     // fn(context, callback)
     promise = new Promise((resolve) => {
       fn(context, function (err, data) {

@@ -1,7 +1,7 @@
-export { default as LoadingBar } from '../..\\src\\components\\LoadingBar.vue'
-export { default as NuxtLogo } from '../..\\src\\components\\NuxtLogo.vue'
-export { default as Tutorial } from '../..\\src\\components\\Tutorial.vue'
-export { default as VuetifyLogo } from '../..\\src\\components\\VuetifyLogo.vue'
+export const LoadingBar = () => import('../..\\src\\components\\LoadingBar.vue' /* webpackChunkName: "components/loading-bar" */).then(c => wrapFunctional(c.default || c))
+export const NuxtLogo = () => import('../..\\src\\components\\NuxtLogo.vue' /* webpackChunkName: "components/nuxt-logo" */).then(c => wrapFunctional(c.default || c))
+export const Tutorial = () => import('../..\\src\\components\\Tutorial.vue' /* webpackChunkName: "components/tutorial" */).then(c => wrapFunctional(c.default || c))
+export const VuetifyLogo = () => import('../..\\src\\components\\VuetifyLogo.vue' /* webpackChunkName: "components/vuetify-logo" */).then(c => wrapFunctional(c.default || c))
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

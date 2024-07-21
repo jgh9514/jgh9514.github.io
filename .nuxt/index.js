@@ -12,13 +12,12 @@ import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 
 /* Plugins */
 
-import nuxt_plugin_plugin_8a7ba924 from 'nuxt_plugin_plugin_8a7ba924' // Source: .\\components\\plugin.js (mode: 'all')
-import nuxt_plugin_plugin_e2c61174 from 'nuxt_plugin_plugin_e2c61174' // Source: .\\vuetify\\plugin.js (mode: 'all')
-import nuxt_plugin_pluginutils_afdda406 from 'nuxt_plugin_pluginutils_afdda406' // Source: .\\nuxt-i18n\\plugin.utils.js (mode: 'all')
-import nuxt_plugin_pluginrouting_c3039ff0 from 'nuxt_plugin_pluginrouting_c3039ff0' // Source: .\\nuxt-i18n\\plugin.routing.js (mode: 'all')
-import nuxt_plugin_pluginmain_460ff867 from 'nuxt_plugin_pluginmain_460ff867' // Source: .\\nuxt-i18n\\plugin.main.js (mode: 'all')
-import nuxt_plugin_toast_13ed2140 from 'nuxt_plugin_toast_13ed2140' // Source: .\\toast.js (mode: 'client')
-import nuxt_plugin_axios_47bcd491 from 'nuxt_plugin_axios_47bcd491' // Source: .\\axios.js (mode: 'all')
+import nuxt_plugin_plugin_b62372d6 from 'nuxt_plugin_plugin_b62372d6' // Source: .\\components\\plugin.js (mode: 'all')
+import nuxt_plugin_plugin_4f08057f from 'nuxt_plugin_plugin_4f08057f' // Source: .\\vuetify\\plugin.js (mode: 'all')
+import nuxt_plugin_toast_c3790232 from 'nuxt_plugin_toast_c3790232' // Source: .\\toast.js (mode: 'client')
+import nuxt_plugin_axios_5bd99b90 from 'nuxt_plugin_axios_5bd99b90' // Source: .\\axios.js (mode: 'all')
+import nuxt_plugin_axios_3566aa80 from 'nuxt_plugin_axios_3566aa80' // Source: ..\\src\\plugins\\axios (mode: 'all')
+import nuxt_plugin_routerTab_79dce8d6 from 'nuxt_plugin_routerTab_79dce8d6' // Source: ..\\src\\plugins\\routerTab (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -69,7 +68,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"titleTemplate":"summonerswar","title":"summonerswar","meta":[{"http-equiv":"X-UA-Compatible","content":"IE-11"},{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"summonerswar"}],"script":[],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"ref":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:300,400,500,700|Material+Icons"},{"ref":"stylesheet","href":"https:\u002F\u002Fcdnjs.cloudflare.com\u002Fajax\u002Flibs\u002Ffont-awesome\u002F5.11.2\u002Fcss\u002Fall.min.css"},{"ref":"stylesheet","href":"https:\u002F\u002Fcdnjs.cloudflare.com\u002Fajax\u002Flibs\u002FMaterialDesign-Webfont\u002F4.4.95\u002Fcss\u002Fmaterialdesignicons.min.css"},{"ref":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAND248,400,0,0"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"}],"style":[]},
+    head: {"titleTemplate":"summonerswar","title":"summonerswar","meta":[{"http-equiv":"X-UA-Compatible","content":"IE-11"},{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"summonerswar"}],"script":[],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"ref":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:300,400,500,700|Material+Icons"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Roboto:100,300,400,500,700,900&display=swap"},{"rel":"stylesheet","type":"text\u002Fcss","href":"https:\u002F\u002Fcdn.jsdelivr.net\u002Fnpm\u002F@mdi\u002Ffont@latest\u002Fcss\u002Fmaterialdesignicons.min.css"}],"style":[]},
 
     router,
     nuxt: {
@@ -94,6 +93,7 @@ async function createApp(ssrContext, config = {}) {
       },
 
       err: null,
+      errPageReady: false,
       dateErr: null,
       error (err) {
         err = err || null
@@ -105,6 +105,7 @@ async function createApp(ssrContext, config = {}) {
         }
         nuxt.dateErr = Date.now()
         nuxt.err = err
+        nuxt.errPageReady = false
         // Used in src/server.js
         if (ssrContext) {
           ssrContext.nuxt.error = err
@@ -184,32 +185,28 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (typeof nuxt_plugin_plugin_8a7ba924 === 'function') {
-    await nuxt_plugin_plugin_8a7ba924(app.context, inject)
+  if (typeof nuxt_plugin_plugin_b62372d6 === 'function') {
+    await nuxt_plugin_plugin_b62372d6(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_plugin_e2c61174 === 'function') {
-    await nuxt_plugin_plugin_e2c61174(app.context, inject)
+  if (typeof nuxt_plugin_plugin_4f08057f === 'function') {
+    await nuxt_plugin_plugin_4f08057f(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_pluginutils_afdda406 === 'function') {
-    await nuxt_plugin_pluginutils_afdda406(app.context, inject)
+  if (process.client && typeof nuxt_plugin_toast_c3790232 === 'function') {
+    await nuxt_plugin_toast_c3790232(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_pluginrouting_c3039ff0 === 'function') {
-    await nuxt_plugin_pluginrouting_c3039ff0(app.context, inject)
+  if (typeof nuxt_plugin_axios_5bd99b90 === 'function') {
+    await nuxt_plugin_axios_5bd99b90(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_pluginmain_460ff867 === 'function') {
-    await nuxt_plugin_pluginmain_460ff867(app.context, inject)
+  if (typeof nuxt_plugin_axios_3566aa80 === 'function') {
+    await nuxt_plugin_axios_3566aa80(app.context, inject)
   }
 
-  if (process.client && typeof nuxt_plugin_toast_13ed2140 === 'function') {
-    await nuxt_plugin_toast_13ed2140(app.context, inject)
-  }
-
-  if (typeof nuxt_plugin_axios_47bcd491 === 'function') {
-    await nuxt_plugin_axios_47bcd491(app.context, inject)
+  if (typeof nuxt_plugin_routerTab_79dce8d6 === 'function') {
+    await nuxt_plugin_routerTab_79dce8d6(app.context, inject)
   }
 
   // Lock enablePreview in context

@@ -4,11 +4,12 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _56801790 = () => interopDefault(import('..\\src\\pages\\addpopup.vue' /* webpackChunkName: "pages/addpopup" */))
-const _c535a946 = () => interopDefault(import('..\\src\\pages\\inspire.vue' /* webpackChunkName: "pages/inspire" */))
-const _cd0c19c6 = () => interopDefault(import('..\\src\\pages\\json\\json.vue' /* webpackChunkName: "pages/json/json" */))
-const _1e21e415 = () => interopDefault(import('..\\src\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
-const _3e8a207c = () => interopDefault(import('..\\src\\pages\\detail\\_detail.vue' /* webpackChunkName: "pages/detail/_detail" */))
+const _69266c01 = () => interopDefault(import('..\\src\\pages\\addpopup.vue' /* webpackChunkName: "pages/addpopup" */))
+const _745e4c03 = () => interopDefault(import('..\\src\\pages\\login.vue' /* webpackChunkName: "pages/login" */))
+const _4b04a39e = () => interopDefault(import('..\\src\\pages\\recent\\index.vue' /* webpackChunkName: "pages/recent/index" */))
+const _a3bcc6b4 = () => interopDefault(import('..\\src\\pages\\json\\json.vue' /* webpackChunkName: "pages/json/json" */))
+const _aa92ae28 = () => interopDefault(import('..\\src\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
+const _2d86584e = () => interopDefault(import('..\\src\\pages\\detail\\_detail.vue' /* webpackChunkName: "pages/detail/_detail" */))
 
 const emptyFn = () => {}
 
@@ -23,23 +24,27 @@ export const routerOptions = {
 
   routes: [{
     path: "/addpopup",
-    component: _56801790,
+    component: _69266c01,
     name: "addpopup"
   }, {
-    path: "/inspire",
-    component: _c535a946,
-    name: "inspire"
+    path: "/login",
+    component: _745e4c03,
+    name: "login"
+  }, {
+    path: "/recent",
+    component: _4b04a39e,
+    name: "recent"
   }, {
     path: "/json/json",
-    component: _cd0c19c6,
+    component: _a3bcc6b4,
     name: "json-json"
   }, {
     path: "/",
-    component: _1e21e415,
+    component: _aa92ae28,
     name: "index"
   }, {
     path: "/detail/:detail?",
-    component: _3e8a207c,
+    component: _2d86584e,
     name: "detail-detail"
   }],
 

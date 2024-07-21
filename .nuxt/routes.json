@@ -2,36 +2,37 @@
   {
     "name": "addpopup",
     "path": "/addpopup",
-    "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\jgh9514.github.io\\\\src\\\\pages\\\\addpopup.vue",
-    "chunkName": "pages/addpopup",
-    "_name": "_56801790"
+    "component": "C:\\\\Users\\\\g\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\addpopup.vue",
+    "chunkName": "pages/addpopup"
   },
   {
-    "name": "inspire",
-    "path": "/inspire",
-    "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\jgh9514.github.io\\\\src\\\\pages\\\\inspire.vue",
-    "chunkName": "pages/inspire",
-    "_name": "_c535a946"
+    "name": "login",
+    "path": "/login",
+    "component": "C:\\\\Users\\\\g\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\login.vue",
+    "chunkName": "pages/login"
+  },
+  {
+    "name": "recent",
+    "path": "/recent",
+    "component": "C:\\\\Users\\\\g\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\recent\\\\index.vue",
+    "chunkName": "pages/recent/index"
   },
   {
     "name": "json-json",
     "path": "/json/json",
-    "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\jgh9514.github.io\\\\src\\\\pages\\\\json\\\\json.vue",
-    "chunkName": "pages/json/json",
-    "_name": "_cd0c19c6"
+    "component": "C:\\\\Users\\\\g\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\json\\\\json.vue",
+    "chunkName": "pages/json/json"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\jgh9514.github.io\\\\src\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_1e21e415"
+    "component": "C:\\\\Users\\\\g\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
   },
   {
     "name": "detail-detail",
     "path": "/detail/:detail?",
-    "component": "C:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\jgh9514.github.io\\\\src\\\\pages\\\\detail\\\\_detail.vue",
-    "chunkName": "pages/detail/_detail",
-    "_name": "_3e8a207c"
+    "component": "C:\\\\Users\\\\g\\\\Documents\\\\GitHub\\\\jgh9514.github.io\\\\src\\\\pages\\\\detail\\\\_detail.vue",
+    "chunkName": "pages/detail/_detail"
   }
 ]
