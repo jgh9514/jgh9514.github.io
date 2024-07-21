@@ -171,7 +171,6 @@ export default {
       this.$nextTick(() => {
         this.searchText = "";
       });
-      // console.log(this.$refs.testaaa.reset())
     },
     getMonsterList() {
       this.$axios
@@ -226,7 +225,6 @@ export default {
           return e;
         }
       });
-      console.log(this.showMonsterList);
     },
     remove(monster_id) {
       this.selectMonster = this.selectMonster.filter((e) => {

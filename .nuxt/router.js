@@ -4,12 +4,12 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _69266c01 = () => interopDefault(import('..\\src\\pages\\addpopup.vue' /* webpackChunkName: "pages/addpopup" */))
-const _745e4c03 = () => interopDefault(import('..\\src\\pages\\login.vue' /* webpackChunkName: "pages/login" */))
-const _4b04a39e = () => interopDefault(import('..\\src\\pages\\recent\\index.vue' /* webpackChunkName: "pages/recent/index" */))
-const _a3bcc6b4 = () => interopDefault(import('..\\src\\pages\\json\\json.vue' /* webpackChunkName: "pages/json/json" */))
-const _aa92ae28 = () => interopDefault(import('..\\src\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
-const _2d86584e = () => interopDefault(import('..\\src\\pages\\detail\\_detail.vue' /* webpackChunkName: "pages/detail/_detail" */))
+const _5f639c0a = () => interopDefault(import('..\\src\\pages\\addpopup.vue' /* webpackChunkName: "pages/addpopup" */))
+const _277ad849 = () => interopDefault(import('..\\src\\pages\\login.vue' /* webpackChunkName: "pages/login" */))
+const _adf6d712 = () => interopDefault(import('..\\src\\pages\\recent\\index.vue' /* webpackChunkName: "pages/recent/index" */))
+const _2b2067c0 = () => interopDefault(import('..\\src\\pages\\json\\json.vue' /* webpackChunkName: "pages/json/json" */))
+const _5dd33532 = () => interopDefault(import('..\\src\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
+const _31a3409f = () => interopDefault(import('..\\src\\pages\\detail\\_detail.vue' /* webpackChunkName: "pages/detail/_detail" */))
 
 const emptyFn = () => {}
 
@@ -24,27 +24,27 @@ export const routerOptions = {
 
   routes: [{
     path: "/addpopup",
-    component: _69266c01,
+    component: _5f639c0a,
     name: "addpopup"
   }, {
     path: "/login",
-    component: _745e4c03,
+    component: _277ad849,
     name: "login"
   }, {
     path: "/recent",
-    component: _4b04a39e,
+    component: _adf6d712,
     name: "recent"
   }, {
     path: "/json/json",
-    component: _a3bcc6b4,
+    component: _2b2067c0,
     name: "json-json"
   }, {
     path: "/",
-    component: _aa92ae28,
+    component: _5dd33532,
     name: "index"
   }, {
     path: "/detail/:detail?",
-    component: _2d86584e,
+    component: _31a3409f,
     name: "detail-detail"
   }],
 

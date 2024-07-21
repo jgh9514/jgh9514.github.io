@@ -51,9 +51,7 @@ export default {
       this.goBack()
     })
   },
-  mounted() {
-    console.log(this.$store);
-  },
+  mounted() {},
   methods: {
     async goBack() {
       this.drawer = false
