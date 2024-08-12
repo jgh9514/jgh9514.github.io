@@ -34,7 +34,7 @@
         </vue-upload>
       </v-col>
       <v-col cols="3">
-        <v-btn @click="save(files2)">등록</v-btn>
+        <v-btn @click="save2(files2)">등록</v-btn>
       </v-col>
       </v-row>
     </v-container>
@@ -69,6 +69,21 @@ export default {
       const reader = new FileReader();
       reader.onload = async () => {
         this.fileContent = reader.result;
+        this.frmData = JSON.parse(this.fileContent)
+        console.log(this.frmData)
+        await this.$axios.post('/api/v1/summonerswar/json-save', this.frmData).then((res) => {
+          if (res.data == 'SUCCESS') {
+            this.$toast.show('저장되었습니다.')
+            this.close()
+          }
+        })
+      };
+      reader.readAsText(file[0].file);
+    },
+    save2(file) {
+      const reader = new FileReader();
+      reader.onload = async () => {
+        this.fileContent = reader.result;
         const jsonArray = this.fileContent.split("\r\n");
         const jsonObjects = [];
         const uniqueObjects = {};
@@ -99,16 +114,6 @@ export default {
               this.$toast.show("성공 : " + res.data.success + "개, 실패 : " + res.data.fail + "개");
             }
           });
-        // this.frmData = JSON.parse(this.fileContent);
-        // console.log(this.frmData);
-        // await this.$axios
-        //   .post("/api/v1/summonerswar/json-save", this.frmData)
-        //   .then((res) => {
-        //     if (res.data == "SUCCESS") {
-        //       this.$toast.show("저장되었습니다.");
-        //       this.close();
-        //     }
-        //   });
       };
       reader.readAsText(file[0].file);
     },
