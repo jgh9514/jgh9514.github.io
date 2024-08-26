@@ -59,3 +59,5 @@ sw.*
 *.swp
 
 .nuxt/
+
+/android/
