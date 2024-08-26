@@ -44,8 +44,8 @@ export default {
     proxyHeaders: false,
     credentials: false,
     withCredentials: true,
-    // baseURL: 'http://localhost:8080',
-    baseURL: 'https://jgh9514.com',
+    baseURL: 'http://localhost:8080',
+    // baseURL: 'https://jgh9514.com',
   },
   proxy: {},
   i18n: {

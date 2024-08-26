@@ -1,7 +1,10 @@
 <template>
   <div>
+    <div>
+      <img :src="require(`../assets/images/banner.jpg`)" width="100%" />
+    </div>
     <v-container>
-      <v-row style="align-items: center;">
+      <v-row style="align-items: center">
         <v-col cols="9">
           <template>
             <v-card color="blue-grey-darken-1" class="mx-auto" max-width="420">
@@ -59,7 +62,9 @@
           </template>
         </v-col>
         <v-col cols="3">
-          <v-btn @click="search()" style="height: 54px; width: 100%;">검색</v-btn>
+          <v-btn @click="search()" style="height: 54px; width: 100%"
+            >검색</v-btn
+          >
         </v-col>
       </v-row>
     </v-container>
@@ -187,6 +192,7 @@ export default {
         .get("/api/v1/summonerswar/enemyTeam-list", { params: this.schData })
         .then((res) => {
           this.monsterList = res.data;
+          console.log(this.monsterList)
         });
       this.pageChange();
     },
@@ -242,13 +248,14 @@ export default {
   display: flex;
   align-items: center;
   width: 100%;
-  margin: 10px auto;
+  margin: 5px auto;
   font-size: 12px;
   text-align: center;
-  color: #000;
-  background-color: #fff;
+  color: #fff;
+  background-color: #27282e;
   box-shadow: 0 0 10px rgba(58, 57, 165, 0.1);
   border-radius: 4px;
+  padding: 10px 0;
 }
 #monsterList .row .col {
   padding: 3px;
