@@ -16,13 +16,13 @@
           <v-col cols="12">
             <v-row>
               <v-col cols="4">
-                <img v-if="data.image_url1 != undefined" :src="require(`../../assets${data.image_url1}`)" />
+                <img v-if="data.image_url1 != undefined" :src="require(`~/assets${data.image_url1}`)" />
               </v-col>
               <v-col cols="4">
-                <img v-if="data.image_url2 != undefined" :src="require(`../../assets${data.image_url2}`)" />
+                <img v-if="data.image_url2 != undefined" :src="require(`~/assets${data.image_url2}`)" />
               </v-col>
               <v-col cols="4">
-                <img v-if="data.image_url3 != undefined" :src="require(`../../assets${data.image_url3}`)" />
+                <img v-if="data.image_url3 != undefined" :src="require(`~/assets${data.image_url3}`)" />
               </v-col>
             </v-row>
           </v-col>
@@ -70,9 +70,9 @@
           <v-col cols="12" class="TeamAnalysis_body">
             <v-row v-for="monster in teamList" :key="monster.team_id">
               <v-col cols="6">
-                <img v-if="monster.image_url1 != undefined" :src="require(`../../assets${monster.image_url1}`)" />
-                <img v-if="monster.image_url2 != undefined" :src="require(`../../assets${monster.image_url2}`)" />
-                <img v-if="monster.image_url3 != undefined" :src="require(`../../assets${monster.image_url3}`)" />
+                <img v-if="monster.image_url1 != undefined" :src="require(`~/assets${monster.image_url1}`)" />
+                <img v-if="monster.image_url2 != undefined" :src="require(`~/assets${monster.image_url2}`)" />
+                <img v-if="monster.image_url3 != undefined" :src="require(`~/assets${monster.image_url3}`)" />
               </v-col>
               <v-col cols="6" style="padding-left: 0;">
                 <p>{{ monster.total_rate + '%' }}<span style="float: right;">{{ '(' + monster.win_count + '승 ' + monster.lose_count + '패)' }}</span></p>
@@ -87,15 +87,15 @@
         </v-row>
       </v-container>
     </div>
-    <addpopup ref="addpopup" @close="popClose()" />
+    <!-- <addpopup ref="addpopup" @close="popClose()" /> -->
   </div>
 </template>
 
 <script>
-import addpopup from '../addpopup.vue'
+// import addpopup from '@pages/addpopup.vue'
 export default {
   components: {
-    addpopup,
+    // addpopup,
   },
   meta: {
     title: '점령전 방덱 상세',
@@ -131,7 +131,7 @@ export default {
       })
     },
     add() {
-      this.$refs.addpopup.open('empty', this.schData.team_id)
+      // this.$refs.addpopup.open('empty', this.schData.team_id)
     },
     popClose() {
       this.search()

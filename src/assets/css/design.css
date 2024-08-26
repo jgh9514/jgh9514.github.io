@@ -1,12 +1,15 @@
 * {
     font-family: sans-serif;
 }
+
 .overflow-y-hidden body {
     overflow: hidden;
 }
+
 .v-dialog--fullscreen {
     overflow-y: hidden !important;
 }
+
 #__layout .v-menu {
     display: block;
 }
@@ -15,16 +18,31 @@
     background-color: rgb(255, 62, 0) !important;
     border-color: rgb(255, 62, 0) !important;
 }
+
 .theme--light.v-pagination .v-pagination__item--active {
     background: #000 !important;
 }
+
 .file-uploads {
     width: 100%;
 }
+
 .v-select.v-select--chips .v-select__selections {
     box-sizing: border-box;
     padding: 0 5px;
 }
+
 .v-list-item::after {
     display: none;
+}
+
+.displaynone {
+    display: none !important;
+}
+
+#app {
+    background: #222;
+}
+#__layout .v-application p {
+    margin-bottom: 0;
 }

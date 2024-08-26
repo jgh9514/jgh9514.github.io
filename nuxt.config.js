@@ -1,3 +1,5 @@
+import path from 'path';
+
 export default {
   srcDir: 'src/',
   ssr: false,
@@ -6,7 +8,7 @@ export default {
     titleTemplate: process.env.npm_package_name,
     title: process.env.npm_package_name,
     meta: [
-      { 'http-equiv': 'X-UA-Compatible', content: 'IE-11'},
+      { 'http-equiv': 'X-UA-Compatible', content: 'IE-11' },
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: process.env.npm_package_name || '' },
@@ -102,10 +104,16 @@ export default {
     parallel: true,
     cache: true,
     hardSource: true,
+    extend(config, ctx) {
+      config.resolve.alias['@'] = path.resolve(__dirname, 'src');
+      config.resolve.alias['@components'] = path.resolve(__dirname, 'src/components');
+      config.resolve.alias['@pages'] = path.resolve(__dirname, 'src/pages');
+      config.resolve.alias['@assets'] = path.resolve(__dirname, 'src/assets');
+    }
   },
   loaders: {
     css: {
-        module: true,
+      module: true,
     },
   },
   toast: {

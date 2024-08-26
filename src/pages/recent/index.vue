@@ -8,7 +8,7 @@
               <v-autocomplete v-model="selectMonster" :items="monsterNameList" chips multiple item-text="kr_name" item-value="monster_id" close-text>
                 <template #selection="{ item, attrs, selected, select }">
                   <v-chip v-bind="attrs" :input-value="selected" close @click="select" @click:close="remove(item.monster_id)">
-                    <v-img :width="16" aspect-ratio="16/9" cover :src="require(`../../assets${item.image_url}`)" style="float: left; height: 16px"></v-img>
+                    <v-img :width="16" aspect-ratio="16/9" cover :src="require(`~/assets${item.image_url}`)" style="float: left; height: 16px"></v-img>
                     {{ item.kr_name }}
                   </v-chip>
                 </template>
@@ -16,7 +16,7 @@
                   <v-list-item v-bind="attrs" v-on="on">
                     <v-list-item-content>
                       <v-list-item-title>
-                        <v-img :width="30" aspect-ratio="16/9" cover :src="require(`../../assets${item.image_url}`)" style="float: left; height: 30px"></v-img>
+                        <v-img :width="30" aspect-ratio="16/9" cover :src="require(`~/assets${item.image_url}`)" style="float: left; height: 30px"></v-img>
                         {{ item.kr_name }}<br />{{ item.un_name }}
                       </v-list-item-title>
                     </v-list-item-content>
@@ -52,9 +52,9 @@
           </v-row>
           <v-row v-for="monster in showMonsterList" :key="monster.key">
             <v-col cols="6" @click="goDetail(monster)">
-              <img v-if="monster.image_url1 != undefined" :src="require(`../../assets${monster.image_url1}`)" />
-              <img v-if="monster.image_url2 != undefined" :src="require(`../../assets${monster.image_url2}`)" />
-              <img v-if="monster.image_url3 != undefined" :src="require(`../../assets${monster.image_url3}`)" />
+              <img v-if="monster.image_url1 != undefined" :src="require(`~/assets${monster.image_url1}`)" />
+              <img v-if="monster.image_url2 != undefined" :src="require(`~/assets${monster.image_url2}`)" />
+              <img v-if="monster.image_url3 != undefined" :src="require(`~/assets${monster.image_url3}`)" />
             </v-col>
             <v-col cols="2">
               {{ monster.total_rate + '%' }}
@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import addpopup from '../addpopup.vue'
+import addpopup from '@pages/addpopup.vue'
 
 export default {
   components: {
