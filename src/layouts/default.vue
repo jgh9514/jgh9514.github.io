@@ -1,13 +1,26 @@
 <template>
   <v-app dark>
-    <v-app-bar app class="header" :class="nowRoute === 'cog' ? 'displaynone' : ''">
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title class="logo" @click="goHome"><img :src="require(`~/assets/images/logo.png`)" /></v-toolbar-title>
+    <v-app-bar
+      app
+      class="header"
+      :class="nowRoute === 'cog' ? 'displaynone' : ''"
+    >
+      <v-toolbar-title class="logo" @click="goHome"
+        >Crazy Monkey</v-toolbar-title
+      >
       <v-spacer></v-spacer>
+      <div class="searchBox">
+        <p class="placeHolder">몬스터 검색</p>
+        <v-icon>mdi-magnify</v-icon>
+      </div>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" app>
       <v-list>
-        <v-list-item v-for="item in items" :key="item.title" @click="navigateTo(item.route)">
+        <v-list-item
+          v-for="item in items"
+          :key="item.title"
+          @click="navigateTo(item.route)"
+        >
           <v-list-item-content>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
@@ -24,16 +37,28 @@
       </v-btn>
       <v-btn @click="navigateTo('/')">
         <span class="homeBtn" :class="nowRoute === '/' ? 'active' : ''">
-          <img :src="require(`~/assets/images/${nowRoute === '/' ? 'ci_active' : 'ci'}.png`)" width="24px" />
+          <img
+            :src="
+              require(`~/assets/images/${
+                nowRoute === '/' ? 'ci_active' : 'ci'
+              }.png`)
+            "
+            width="24px"
+          />
         </span>
       </v-btn>
-      <v-btn @click="navigateTo('cog')" :class="nowRoute === 'cog' ? 'active' : ''">
+      <v-btn
+        @click="navigateTo('cog')"
+        :class="nowRoute === 'cog' ? 'active' : ''"
+      >
         <span>설정</span>
         <v-icon>mdi-cog</v-icon>
       </v-btn>
     </v-bottom-navigation>
     <transition name="slide-y-reverse-transition">
-      <v-snackbar v-model="showSnackbar" :timeout="2000" transition="true">뒤로 버튼을 한번 더 누르면 어플리케이션이 종료됩니다.</v-snackbar>
+      <v-snackbar v-model="showSnackbar" :timeout="2000" transition="true"
+        >뒤로 버튼을 한번 더 누르면 어플리케이션이 종료됩니다.</v-snackbar
+      >
     </transition>
   </v-app>
 </template>
@@ -53,7 +78,7 @@ export default {
       ],
       showSnackbar: false,
       backButtonPressedOnce: false,
-      nowRoute: '/',
+      nowRoute: "/",
     };
   },
   created() {
@@ -61,7 +86,7 @@ export default {
       this.goBack();
     });
   },
-  mounted() { },
+  mounted() {},
   methods: {
     async goBack() {
       this.drawer = false;
@@ -84,8 +109,8 @@ export default {
       this.$router.push("/");
     },
     navigateTo(route) {
-      if (route === '/') this.nowRoute = '/'
-      else if (route === 'cog') this.nowRoute = 'cog'
+      if (route === "/") this.nowRoute = "/";
+      else if (route === "cog") this.nowRoute = "cog";
       this.$router.push(route);
     },
   },
@@ -93,7 +118,8 @@ export default {
 </script>
 <style scoped>
 .header {
-  background: #fff !important;
+  background: #222 !important;
+  box-shadow: none !important;
 }
 
 .logo {
@@ -101,16 +127,29 @@ export default {
   align-items: center;
   padding: 0;
   height: 100%;
+  color: #fff;
+  font-weight: bold;
+}
+.header .searchBox {
+  width: calc(100% - 150px);
+  background: #363944;
+  position: relative;
+  padding: 7px 10px;
+  border-radius: 5px;
+  margin-left: 15px;
+}
+.header .searchBox .placeHolder {
+  color: #999;
+  font-size: 13px;
+  font-weight: bold;
+}
+.header .searchBox .mdi-magnify {
   position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
 }
-
-.logo>img {
-  height: 75%;
-}
-
 .contents {
   padding: 56px 0;
 }
@@ -124,7 +163,7 @@ export default {
   width: 33.3%;
 }
 
-.v-bottom-navigation .v-btn__content>span {
+.v-bottom-navigation .v-btn__content > span {
   color: #bbb;
   margin-top: 5px;
   font-size: 9px;
@@ -145,7 +184,7 @@ export default {
   margin: 0 !important;
 }
 
-.homeBtn>img {
+.homeBtn > img {
   width: 24px;
   position: absolute;
   top: 50%;
@@ -162,7 +201,7 @@ export default {
   background: #000;
 }
 
-.homeBtn.active>img {
+.homeBtn.active > img {
   width: 34px;
 }
 </style>

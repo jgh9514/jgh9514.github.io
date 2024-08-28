@@ -32,7 +32,7 @@ export default {
 
 .section1 {
   position: absolute;
-  bottom: -25px;
+  bottom: -20px;
   display: flex;
   align-items: center;
   width: 90%;
