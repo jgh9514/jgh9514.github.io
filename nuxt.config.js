@@ -109,6 +109,22 @@ export default {
       config.resolve.alias['@components'] = path.resolve(__dirname, 'src/components');
       config.resolve.alias['@pages'] = path.resolve(__dirname, 'src/pages');
       config.resolve.alias['@assets'] = path.resolve(__dirname, 'src/assets');
+
+      config.module.rules.forEach(rule => {
+        if (rule.test && /\.(png|jpe?g|gif|svg|webp)$/.test(rule.test.toString())) {
+          // 기존 로더 설정이 있다면 덮어씁니다.
+          rule.use = [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 1000, // 1KB 이하의 파일은 base64로 인라인 처리
+                name: 'img/[name].[contenthash:7].[ext]', // 이미지 파일에 해시 적용
+                esModule: false, // esModule 옵션을 false로 설정하여 이미지 경로가 제대로 로드되도록 합니다.
+              }
+            }
+          ];
+        }
+      });
     }
   },
   loaders: {

@@ -46,3 +46,8 @@
 #__layout .v-application p {
     margin-bottom: 0;
 }
+.btnBox {
+    display: flex;
+    justify-content: center;
+    gap: 0 10px;
+}
