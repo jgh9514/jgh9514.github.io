@@ -166,6 +166,7 @@ export default {
 .v-bottom-navigation .v-btn {
   width: 33.3%;
   height: 100%;
+  background: #363944;
 }
 
 .v-bottom-navigation .v-btn__content>span {

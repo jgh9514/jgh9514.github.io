@@ -5,8 +5,12 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _5f639c0a = () => interopDefault(import('..\\src\\pages\\addpopup.vue' /* webpackChunkName: "pages/addpopup" */))
+const _169db94a = () => interopDefault(import('..\\src\\pages\\cog.vue' /* webpackChunkName: "pages/cog" */))
+const _4078e619 = () => interopDefault(import('..\\src\\pages\\fommater.vue' /* webpackChunkName: "pages/fommater" */))
 const _277ad849 = () => interopDefault(import('..\\src\\pages\\login.vue' /* webpackChunkName: "pages/login" */))
 const _adf6d712 = () => interopDefault(import('..\\src\\pages\\recent\\index.vue' /* webpackChunkName: "pages/recent/index" */))
+const _08524a78 = () => interopDefault(import('..\\src\\pages\\search.vue' /* webpackChunkName: "pages/search" */))
+const _24826b15 = () => interopDefault(import('..\\src\\pages\\siege\\index.vue' /* webpackChunkName: "pages/siege/index" */))
 const _2b2067c0 = () => interopDefault(import('..\\src\\pages\\json\\json.vue' /* webpackChunkName: "pages/json/json" */))
 const _5dd33532 = () => interopDefault(import('..\\src\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 const _31a3409f = () => interopDefault(import('..\\src\\pages\\detail\\_detail.vue' /* webpackChunkName: "pages/detail/_detail" */))
@@ -27,6 +31,14 @@ export const routerOptions = {
     component: _5f639c0a,
     name: "addpopup"
   }, {
+    path: "/cog",
+    component: _169db94a,
+    name: "cog"
+  }, {
+    path: "/fommater",
+    component: _4078e619,
+    name: "fommater"
+  }, {
     path: "/login",
     component: _277ad849,
     name: "login"
@@ -34,6 +46,14 @@ export const routerOptions = {
     path: "/recent",
     component: _adf6d712,
     name: "recent"
+  }, {
+    path: "/search",
+    component: _08524a78,
+    name: "search"
+  }, {
+    path: "/siege",
+    component: _24826b15,
+    name: "siege"
   }, {
     path: "/json/json",
     component: _2b2067c0,

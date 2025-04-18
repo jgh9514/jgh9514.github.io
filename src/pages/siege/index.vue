@@ -70,7 +70,7 @@
       </v-row>
     </v-container>
     <div class="text-center">
-      <v-pagination v-model="page" :length="Math.floor(monsterList.length / schData.paging)" :total-visible="8"
+      <v-pagination v-model="page" :length="Math.floor(monsterList.length / schData.paging)" :total-visible="6"
         @input="pageChange('paging')"></v-pagination>
       <v-select v-model="schData.paging" :items="listData" item-text="cd_nm" item-value="cd" variant="outlined"
         style="padding: 0 20px; width: 200px; float: right" @change="pageChange('select')"></v-select>

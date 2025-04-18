@@ -73,7 +73,7 @@
       <v-pagination
         v-model="page"
         :length="Math.floor(monsterList.length / schData.paging)"
-        :total-visible="8"
+        :total-visible="6"
         @input="pageChange('paging')"
       ></v-pagination>
       <v-select

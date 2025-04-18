@@ -3,42 +3,40 @@
     <div class="title">설정</div>
     <v-container>
       <v-row>
-        <div @click="navigateTo('/json/json')">JSON 데이터 추가</div>
-      </v-row>
-      <v-row>
-        <div>버전 0.0.1</div>
-        <div>최신 버전</div>
+        <v-col cols="12">
+          <div @click="navigateTo('/json/json')">JSON 데이터 추가</div>
+        </v-col>
+        <v-col cols="12" style="display: flex; justify-content: space-between">
+          <div>버전 0.0.1</div>
+          <div>최신 버전</div>
+        </v-col>
       </v-row>
     </v-container>
   </div>
 </template>
 
 <script>
-
 export default {
   components: {},
   data() {
-    return {}
+    return {};
   },
-  computed: {
-  },
-  async mounted() {
-  },
+  computed: {},
+  async mounted() {},
   methods: {
     navigateTo(route) {
       this.$router.push(route);
     },
-    
   },
-}
+};
 </script>
 <style scoped>
-  #cog {
-    color: #fff;
-    padding: 10px;
-  }
-  #cog .title {
-    font-size: 25px;
-    font-weight: bold;
-  }
+#cog {
+  color: #fff;
+  padding: 10px;
+}
+#cog .title {
+  font-size: 25px;
+  font-weight: bold;
+}
 </style>
