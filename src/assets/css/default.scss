@@ -1,0 +1,97 @@
+  
+  * {
+    font-family: sans-serif;
+    font-weight: 400; /* bold와 같음 */
+  }
+  
+  html {
+    overflow: hidden !important;
+    -webkit-transition: none !important;
+    transition: none !important;
+    font-size: 13px;
+  }
+  
+  body {
+    height: 100vh;
+  }
+  
+  $dc-bg-color: #2CA4F7;
+  $dc-active-label-color: #2CA4F7;
+  $dc-hover-label-color: #2CA4F7;
+  $dc-scroll-color: #78C5FA;
+  
+  /* 스크롤바 전체 영역 */
+  ::-webkit-scrollbar {
+    width: 6px;  /* 세로축 스크롤바 폭 너비 */
+    height: 20px;  /* 가로축 스크롤바 폭 너비 */
+  }
+  
+  /* 스크롤바 막대 */
+  ::-webkit-scrollbar-thumb {
+    background: $dc-scroll-color; /* 스크롤바 막대 색상 */
+    border: 1px solid $dc-scroll-color; /* 스크롤바 막대 테두리 설정  */
+    border-radius: 12px 12px 12px 12px;
+  }
+  
+  .menu-active {
+    background-color: $dc-bg-color !important;
+    color: white !important;
+  }
+  
+  .app-bar-btn-menu {
+    color: $dc-hover-label-color !important;
+  }
+  
+  .router-tab-add-btn {
+    height: 100% !important;
+  }
+  
+  .router-tab-add-btn-hover {
+    color: $dc-hover-label-color !important;
+  }
+  
+  .router-tab-add-btn-tooltip {
+    background-color: $dc-bg-color;
+  }
+  
+  .app-bar-dialog-site-map {
+    background-color: $dc-bg-color;
+    position: fixed;
+    height: 101vh;
+  }
+  .app-bar-dialog-site-map-menu {
+    margin-left: 500px;
+    height: 101vh;
+  }
+  
+  .page-header-path-navigator {
+    font-size: 12px;
+    justify-content: flex-end;
+  }
+  
+  /**
+  * 억지로 함 ㅜㅜ
+  */
+  .left-menu-tree {
+    .v-btn {
+      position: absolute !important;
+      right: 15px;
+      .mdi-menu-right {
+        transform: rotate(90deg);
+      }
+      .mdi-menu-down {
+        transform: rotate(180deg);
+      }
+    }
+  }
+  
+  .left-menu-list-hover {
+    &:hover {
+      color: $dc-bg-color;
+    }
+  }
+  
+  .dc-col-label {
+    font-weight: bold;
+  }
+  

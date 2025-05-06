@@ -1,102 +1,90 @@
 <template>
-  <v-app>
-    <div class="container">
-      <img src="@/assets/images/logo.png" alt="Logo" class="logo" />
-      <v-text-field
-        v-model="id"
-        label="아이디"
-        prepend-icon="mdi-account"
-        variant="underlined"
-        hide-details
-        :style="{ 'font-size': '16px' }"
-      ></v-text-field>
-      <v-text-field
-        v-model="password"
-        type="password"
-        label="비밀번호"
-        prepend-icon="mdi-lock"
-        variant="underlined"
-        hide-details
-        :style="{ 'font-size': '16px' }"
-      ></v-text-field>
-      <div class="btnBox">
-        <v-btn class="loginBtn" @click="login()">로그인</v-btn>
-        <v-checkbox v-model="rememberMe" label="자동 로그인"></v-checkbox>
-      </div>
-      <div v-if="warning" class="warningComment">
-        <v-icon left>mdi-alert-circle</v-icon>
-        <p>부적합한 사용자명 또는 암호가<br />지정되었습니다.</p>
-      </div>
+  <div class="full-width" style="height: 100vh;">
+    <div class="absolute-center">
+      <v-card
+        class="mx-auto pa-3"
+        min-width="400"
+        flat
+      >
+        <v-card-item class="mt-4">
+          <div class="text-h5 text-center font-weight-bold">
+            Login
+          </div>
+        </v-card-item>
+        <v-card-item class="mt-4">
+          <v-text-field
+            v-model="frmDatas.id"
+            placeholder="ID"
+            color="#2CA4F7"
+            variant="outlined"
+            block
+          />
+          <v-text-field
+            v-model="frmDatas.password"
+            type="password"
+            placeholder="Password"
+            color="#2CA4F7"
+            variant="outlined"
+            block
+            @keyup.enter="login"
+          />
+        </v-card-item>
+        <v-card-item class="mt-2">
+          <v-btn
+            color="red-lighten-2"
+            text="Login"
+            variant="outlined"
+            block
+            @click="login"
+          />
+        </v-card-item>
+      </v-card>
     </div>
-  </v-app>
+  </div>
 </template>
-  
-<script>
-export default {
-  layout: "no-layout",
-  data() {
-    return {
-      email: "",
-      password: "",
-      rememberMe: false,
-      warning: false,
-    };
-  },
-  methods: {
-    login() {
-      console.log("Email:", this.email);
-      console.log("Password:", this.password);
-      console.log("Remember me:", this.rememberMe);
-      this.warning = true;
-    },
-  },
-};
+<script setup>
+definePageMeta({
+  layout: 'empty'
+})
+
+const validation = () => {
+  // if($gfn_isEmpty(frmDatas.value.cmpy_cd)) {
+  //   alert('회사코드를 입력해주세요.')
+  //   return
+  // }
+  if($gfn_isEmpty(frmDatas.value.id)) {
+    $toast($t('아이디를 입력해주세요.'), 'error')
+    return false
+  }
+  if($gfn_isEmpty(frmDatas.value.password)) {
+    $toast($t('비밀번호를 입력해주세요.'), 'error')
+    return false
+  }
+
+  return true
+}
+
+const frmDatas = ref({
+  cmpy_cd: '',
+  id: '',
+  password: ''
+})
+
+const login = async () => {
+  if(validation()) {
+    await $api.get('/common/login', frmDatas.value)
+    const res = await $api.get('/common/whoami')
+    $gfn_setUser(res.userInfo)
+
+    location.href = '/'
+  }
+}
 </script>
-  
-<style>
-.container {
-  width: 90%;
-  margin: 0 auto;
-}
-.logo {
-  display: table;
-  width: 100%;
-  height: auto;
-  margin: 50px auto;
-}
-.mdi-account,
-.mdi-lock {
-  font-size: 18px !important;
-  color: #aaa !important;
-}
-.v-text-field input {
-  font-size: 13px !important;
-}
-.v-label {
-  font-size: 13px !important;
-}
-.v-label--active {
-  color: #0b2481 !important;
-  font-weight: bold !important;
-}
-.btnBox {
-  margin-top: 15px;
-}
-.loginBtn {
-  width: 100%;
-  background: #5479ff !important;
-  color: #fff !important;
-}
-.warningComment {
-  display: flex;
-  align-items: center;
-}
-.warningComment > p {
-  color: #c50000;
-  margin: 0;
-  font-size: 13px;
-}
-.mdi-alert-circle {
-  color: #c50000 !important;
+<style scoped>
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>

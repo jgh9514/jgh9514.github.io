@@ -15,24 +15,15 @@
   </div>
 </template>
 
-<script>
-export default {
-  components: {},
-  data() {
-    return {};
-  },
-  computed: {},
-  async mounted() {},
-  methods: {
-    navigateTo(route) {
-      this.$router.push(route);
-    },
-  },
+<script setup>
+const router = useRouter();
+
+const navigateTo = (route) => {
+  router.push(route);
 };
 </script>
 <style scoped>
 #cog {
-  color: #fff;
   padding: 10px;
 }
 #cog .title {

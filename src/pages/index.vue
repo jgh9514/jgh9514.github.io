@@ -1,13 +1,10 @@
 <template>
-  <div>
+  <div style="height: 100%; background: #222">
     <div class="main_banner">
-      <img
-        :src="require(`~/assets/images/main/main_banner1.jpg`)"
-        width="100%"
-      />
+      <img :src="`${Constants.BASE_URL}/images/main/main_banner1.jpg`" width="100%" />
       <div class="section section1" @click="navigateTo('/recent')">
         <p>최근 점령전<span>NEW</span></p>
-        <img :src="require(`~/assets/images/main/section1.png`)" />
+        <img src="/assets/images/main/section1.png" />
       </div>
     </div>
     <div class="middle_banner">
@@ -15,45 +12,31 @@
         <div class="section section2">
           <p class="title">즐겨찾기</p>
           <p class="subTitle">관심 방덱 저장</p>
-          <img :src="require(`~/assets/images/main/section2.png`)" />
+          <img :src="`${Constants.BASE_URL}/images/main/section2.png`" />
         </div>
         <div class="section section3">
           <p class="title">공덱 조합</p>
           <p class="subTitle">스펙 보기</p>
-          <img :src="require(`~/assets/images/main/section3.png`)" />
+          <img :src="`${Constants.BASE_URL}/images/main/section3.png`" />
         </div>
       </div>
       <div class="rightBox">
         <div class="section section4" @click="navigateTo('/siege')">
           <p class="title">전체 점령전</p>
           <p class="subTitle">시즌별 공방덱 통계</p>
-          <img :src="require(`~/assets/images/main/section4.png`)" />
+          <img :src="`${Constants.BASE_URL}/images/main/section4.png`" />
         </div>
       </div>
     </div>
     <div class="bottom_banner">
-      <div class="section section5" @click="navigateTo('/siege')">
+      <div class="section section5" @click="navigateTo('/record')">
         <p class="title">시즌 성적표</p>
         <p class="subTitle">시즌별 공성률 통계</p>
-        <img :src="require(`~/assets/images/main/section5.png`)" />
+        <img :src="`${Constants.BASE_URL}/images/main/section5.png`" />
       </div>
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  data() {
-    return {};
-  },
-  mounted() {},
-  methods: {
-    navigateTo(route) {
-      this.$router.push(route);
-    },
-  },
-};
-</script>
 <style scoped>
 .main_banner {
   position: relative;
