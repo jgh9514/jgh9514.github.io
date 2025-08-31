@@ -65,6 +65,72 @@
         />
       </template>
     </v-list>
+    
+    <!-- 서머너즈워 메뉴 -->
+    <v-divider></v-divider>
+    <v-list>
+      <!-- 실레나 메뉴 -->
+      <v-list-item
+        prepend-icon="mdi-trophy"
+        title="실레나"
+        value="rta"
+        class="left-menu-list-hover"
+        :color="Constants.DC_BG_COLOR"
+        @click="goToRta"
+      />
+      
+      <!-- 점령전 메뉴 그룹 -->
+      <v-list-group value="siege-group" :model-value="true">
+        <template #activator="{ props }">
+          <v-list-item
+            v-bind="props"
+            prepend-icon="mdi-sword-cross"
+            title="점령전"
+            value="siege-group"
+            class="left-menu-list-hover"
+            :color="Constants.DC_BG_COLOR"
+          />
+        </template>
+        
+        <!-- 점령전 하위 메뉴들 -->
+        <v-list-item
+          title="전체 점령전"
+          value="siege"
+          class="left-menu-list-hover pl-8 sub-menu-item"
+          :color="Constants.DC_BG_COLOR"
+          @click="goToSiege"
+        />
+        <v-list-item
+          title="최근 점령전"
+          value="recent"
+          class="left-menu-list-hover pl-8 sub-menu-item"
+          :color="Constants.DC_BG_COLOR"
+          @click="goToRecent"
+        />
+        <v-list-item
+          title="시즌 성적표"
+          value="record"
+          class="left-menu-list-hover pl-8 sub-menu-item"
+          :color="Constants.DC_BG_COLOR"
+          @click="goToRecord"
+        />
+      </v-list-group>
+    </v-list>
+    
+    <!-- 설정 메뉴 (하단 고정) -->
+    <template #append>
+      <v-divider></v-divider>
+      <v-list>
+        <v-list-item
+          prepend-icon="mdi-cog"
+          title="설정"
+          value="settings"
+          class="left-menu-list-hover"
+          :color="Constants.DC_BG_COLOR"
+          @click="goToSettings"
+        />
+      </v-list>
+    </template>
   </v-navigation-drawer>
 </template>
 <script setup>
@@ -92,4 +158,67 @@ watch(isMobile, (newValue) => {
 const goMenu = (item) => {
   router.push(item.path);
 };
+
+// 설정 페이지로 이동하는 함수
+const goToSettings = () => {
+  router.push('/settings');
+};
+
+// 서머너즈워 메뉴 네비게이션 함수들
+const goToSiege = () => {
+  router.push('/siege');
+};
+
+const goToRta = () => {
+  router.push('/rta');
+};
+
+const goToRecord = () => {
+  router.push('/record');
+};
+
+const goToRecent = () => {
+  router.push('/recentSiege');
+};
+
+const goToSearch = () => {
+  router.push('/search');
+};
 </script>
+
+<style scoped>
+/* 서브 메뉴 아이템 스타일 */
+.sub-menu-item {
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.sub-menu-item:hover {
+  border-left-color: var(--v-primary-base);
+  background-color: rgba(var(--v-primary-base), 0.1);
+}
+
+/* 메뉴 그룹 활성화 상태 개선 */
+.v-list-group--open .v-list-group__header {
+  background-color: rgba(var(--v-primary-base), 0.05);
+  border-left: 3px solid var(--v-primary-base);
+}
+
+/* 메뉴 아이템 선택 상태 개선 */
+.v-list-item--active {
+  background-color: rgba(var(--v-primary-base), 0.15) !important;
+  border-left: 3px solid var(--v-primary-base);
+}
+
+/* 호버 효과 개선 */
+.left-menu-list-hover:hover {
+  background-color: rgba(var(--v-primary-base), 0.08);
+  transform: translateX(4px);
+  transition: all 0.3s ease;
+}
+
+/* 서브 메뉴 호버 시 부드러운 전환 */
+.sub-menu-item:hover {
+  transform: translateX(8px);
+}
+</style>

@@ -626,16 +626,22 @@ $tablet-breakpoint: 1023px;
   }
 
   tr:nth-child(even) td {
-    background-color: #ffffff;
+    background-color: #ebf0ff;
   }
 
-  img {
+  .monster-container {
     float: left;
     margin-left: -10px;
     width: 33.3%;
-    border: 2px solid #fff;
-    border-radius: 50%;
     box-sizing: border-box;
+
+    > img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      object-fit: cover;
+    }
   }
 
   img:first-child {
@@ -684,4 +690,53 @@ $tablet-breakpoint: 1023px;
 
 @include desktop {
   // PC 스타일
+}
+
+/* 리더 아이콘 공통 스타일 */
+.position-relative {
+  position: relative;
+}
+
+.monster-container {
+  position: relative;
+  display: inline-block;
+}
+
+.leader-badge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.leader-icon-small {
+  display: block;
+  width: 40% !important;
+  height: auto;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.leader-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.leader-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid #d79f34;
+}
+
+.leader-details {
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.2;
 }

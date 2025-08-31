@@ -2,7 +2,7 @@
   <div style="height: 100%; background: #222">
     <div class="main_banner">
       <img :src="`${Constants.BASE_URL}/images/main/main_banner1.jpg`" width="100%" />
-      <div class="section section1" @click="navigateTo('/recent')">
+      <div class="section section1" @click="navigateTo('/recentSiege')">
         <p>최근 점령전<span>NEW</span></p>
         <img src="/assets/images/main/section1.png" />
       </div>

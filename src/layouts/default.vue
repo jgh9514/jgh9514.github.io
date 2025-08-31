@@ -10,10 +10,10 @@
       </v-layout>
     </div>
     <!-- 전역 공통 컴포넌트 -->
-    <CommonAlert />
+    <CommonAlert v-if="alertStore.$state.isShow" />
 
     <!-- Confirm 컴포넌트  -->
-    <CommonConfirm />
+    <CommonConfirm v-if="confirmStore.$state.isShow" />
 
     <!-- 로딩 바 -->
     <CommonApiLoading />
@@ -21,6 +21,8 @@
 </template>
 <script setup>
 const menuStore = useMenuStore();
+const alertStore = useAlertStore();
+const confirmStore = useConfirmStore();
 
 // 화면 크기에 따른 디바이스 타입 설정
 const handleResize = () => {

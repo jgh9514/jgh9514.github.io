@@ -22,52 +22,41 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@vite-pwa/nuxt',
     'dayjs-nuxt',
-    'pinia-plugin-persistedstate',
-    '@vue-email/nuxt',
     '@nuxtjs/device',
     'nuxt-aos',
-    '@nuxtjs/i18n',
     'nuxt-toast',
   ],
-  eslint: {
-    // options here
-  },
   pinia: {
     storesDirs: ['./src/stores/**'],
   },
   vuetify: {
     vuetifyOptions: {
       labComponents: true,
-    },
-    theme: {
-      dark: false,
-      default: 'light',
-      disable: false,
-      options: {
-        cspNonce: undefined,
-        customProperties: undefined,
-        minifyTheme: undefined,
-        themeCache: undefined,
-        variations: true,
-      },
-      themes: {
-        light: {
-          primary: '#738599',
-          secondary: '#444',
-          accent: '#DC3641',
-          error: '#FF5252',
-          info: '#2196F3',
-          success: '#4CAF50',
-          warning: '#FB8C00',
-        },
-        dark: {
-          primary: '#2196F3',
-          secondary: '#424242',
-          accent: '#FF4081',
-          error: '#FF5252',
-          info: '#2196F3',
-          success: '#4CAF50',
-          warning: '#FB8C00',
+      theme: {
+        defaultTheme: 'light',
+        themes: {
+          light: {
+            colors: {
+              primary: '#738599',
+              secondary: '#444',
+              accent: '#DC3641',
+              error: '#FF5252',
+              info: '#2196F3',
+              success: '#4CAF50',
+              warning: '#FB8C00',
+            },
+          },
+          dark: {
+            colors: {
+              primary: '#2196F3',
+              secondary: '#424242',
+              accent: '#FF4081',
+              error: '#FF5252',
+              info: '#2196F3',
+              success: '#4CAF50',
+              warning: '#FB8C00',
+            },
+          },
         },
       },
     },

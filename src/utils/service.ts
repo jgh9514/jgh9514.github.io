@@ -86,3 +86,76 @@ export const $api = {
   delete: (url: string, params = {}) => baseFetch(url, 'DELETE', params),
   put: (url: string, body = {}) => baseFetch(url, 'PUT', body)
 }
+
+// RTA API를 위한 별도 서비스 함수들
+const rtaBaseFetch = async (url: string, method: string, params = {}) => {
+  const defaultOptions = {
+    credentials: 'include',
+    headers: {
+      'Content-Type': Constants.HEADERS_CONTENT_TYPE_APPLICATION_JSON
+    }
+  }
+
+  try {
+    loadingCount++
+    loading.value = true
+
+    const isBodyMethod = ['POST', 'PUT'].includes(method)
+    const requestUrl = isBodyMethod 
+      ? `${Constants.BASE_URL}${url}`
+      : `${Constants.BASE_URL}${url}?${new URLSearchParams(params).toString()}`
+
+    const requestOptions = {
+      ...defaultOptions,
+      method,
+      ...(isBodyMethod && { body: JSON.stringify(params) })
+    } as RequestInit
+
+    const response = await fetch(requestUrl, requestOptions)
+    if (!response.ok) {
+      const errorMessages: { [key: number]: string } = {
+        400: '잘못된 요청입니다',
+        401: '인증이 필요합니다',
+        403: '접근이 거부되었습니다', 
+        404: '요청한 리소스를 찾을 수 없습니다',
+        500: '서버 내부 오류가 발생했습니다',
+        502: '게이트웨이 오류가 발생했습니다',
+        503: '서비스를 사용할 수 없습니다'
+      }
+
+      loadingCount--
+      if (loadingCount === 0) {
+        loading.value = false
+      }
+      throw new Error(errorMessages[response.status] || `HTTP 오류! 상태: ${response.status}`)
+    }
+
+    const contentType = response.headers.get('Content-Type')
+    let result;
+    if (contentType && contentType.includes('application/json')) {
+        result = await response.json()
+    } else {
+        result = await response.blob();
+    }
+
+    loadingCount--
+    if (loadingCount === 0) {
+      loading.value = false
+    }
+    return result
+
+  } catch (error) {
+    loadingCount--
+    if (loadingCount === 0) {
+      loading.value = false
+    }
+    throw error
+  }
+}
+
+export const $rtaApi = {
+  get: (url: string, params = {}) => rtaBaseFetch(url, 'GET', params),
+  post: (url: string, body = {}) => rtaBaseFetch(url, 'POST', body),
+  delete: (url: string, params = {}) => rtaBaseFetch(url, 'DELETE', params),
+  put: (url: string, body = {}) => rtaBaseFetch(url, 'PUT', body)
+}

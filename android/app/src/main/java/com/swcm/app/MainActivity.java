@@ -1,4 +1,4 @@
-package com.summonerswar.swcm;
+package com.swcm.app;
 
 import com.getcapacitor.BridgeActivity;
 

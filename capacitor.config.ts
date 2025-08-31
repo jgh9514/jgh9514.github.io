@@ -40,7 +40,6 @@ const config: CapacitorConfig = {
       useDialog: true,
     },
   },
-  bundledWebRuntime: false,
 };
 
 export default config;

@@ -22,8 +22,8 @@
         <template v-slot:item="{ item }">
           <tr>
             <td>
-              <div class="d-flex align-center">
-                <div class="text-left" style="flex: 1">
+              <div class="battle-row">
+                <div class="battle-side left-side">
                   <p
                     class="battle-result"
                     :class="item.win_lose === '1' ? 'win' : 'lose'"
@@ -32,14 +32,28 @@
                   </p>
                   <p class="guild-name">{{ item.guild_name }}</p>
                   <p class="player-name">{{ item.wizard_name }}</p>
-                  <span class="monster-images">
-                    <img :src="`${Constants.BASE_URL}${item.attack_monster_1}`" />
-                    <img :src="`${Constants.BASE_URL}${item.attack_monster_2}`" />
-                    <img :src="`${Constants.BASE_URL}${item.attack_monster_3}`" />
-                  </span>
+                  <div class="monster-images">
+                    <img 
+                      v-if="item.attack_monster_1" 
+                      :src="`${Constants.BASE_URL}${item.attack_monster_1}`" 
+                      class="monster-img"
+                    />
+                    <img 
+                      v-if="item.attack_monster_2" 
+                      :src="`${Constants.BASE_URL}${item.attack_monster_2}`" 
+                      class="monster-img"
+                    />
+                    <img 
+                      v-if="item.attack_monster_3" 
+                      :src="`${Constants.BASE_URL}${item.attack_monster_3}`" 
+                      class="monster-img"
+                    />
+                  </div>
                 </div>
-                <span>vs</span>
-                <div class="text-right" style="flex: 1">
+                <div class="battle-vs">
+                  <span>vs</span>
+                </div>
+                <div class="battle-side right-side">
                   <p
                     class="battle-result"
                     :class="item.win_lose === '1' ? 'lose' : 'win'"
@@ -48,11 +62,23 @@
                   </p>
                   <p class="guild-name">{{ item.opp_guild_name }}</p>
                   <p class="player-name">{{ item.opp_wizard_name }}</p>
-                  <span class="monster-images">
-                    <img :src="`${Constants.BASE_URL}${item.defense_monster_1}`" />
-                    <img :src="`${Constants.BASE_URL}${item.defense_monster_2}`" />
-                    <img :src="`${Constants.BASE_URL}${item.defense_monster_3}`" />
-                  </span>
+                  <div class="monster-images">
+                    <img 
+                      v-if="item.defense_monster_1" 
+                      :src="`${Constants.BASE_URL}${item.defense_monster_1}`" 
+                      class="monster-img"
+                    />
+                    <img 
+                      v-if="item.defense_monster_2" 
+                      :src="`${Constants.BASE_URL}${item.defense_monster_2}`" 
+                      class="monster-img"
+                    />
+                    <img 
+                      v-if="item.defense_monster_3" 
+                      :src="`${Constants.BASE_URL}${item.defense_monster_3}`" 
+                      class="monster-img"
+                    />
+                  </div>
                 </div>
               </div>
             </td>
@@ -78,12 +104,6 @@ const search = async () => {
   const res = await $api.get("/summonerswar/record-detail", searchData);
   userList.value = [...res];
   console.log(userList.value);
-};
-
-const goDetail = (user) => {
-  navigateTo({
-    path: "/record/detail/" + user.wizard_id,
-  });
 };
 </script>
 <style>
@@ -113,5 +133,29 @@ const goDetail = (user) => {
 .page-btn.active {
   background: #f00;
   color: #fff;
+}
+.battle-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.battle-row .left-side .guild-name {
+  text-align: left;
+}
+.battle-row .left-side .player-name {
+  text-align: left;
+}
+.battle-row .right-side .guild-name {
+  text-align: right;
+}
+.battle-row .right-side .player-name {
+  text-align: right;
+}
+.monster-images {
+  gap: 5px;
+}
+.monster-images > img {
+  width: 33.3%;
 }
 </style>

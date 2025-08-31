@@ -1,15 +1,18 @@
   
-  * {
-    font-family: sans-serif;
-    font-weight: 400; /* bold와 같음 */
-  }
+  @use './scrollbar.scss';
+
+* {
+  font-family: sans-serif;
+  font-weight: 400; /* bold와 같음 */
+}
   
   html {
-    overflow: hidden !important;
-    -webkit-transition: none !important;
-    transition: none !important;
-    font-size: 13px;
-  }
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-transition: none !important;
+  transition: none !important;
+  font-size: 13px;
+}
   
   body {
     height: 100vh;
@@ -92,6 +95,23 @@
   }
   
   .dc-col-label {
-    font-weight: bold;
-  }
-  
+  font-weight: bold;
+}
+
+/* 테이블 스타일 강제 적용 */
+.v-table .td,
+.v-table td,
+.v-data-table .v-data-table__td,
+.v-data-table td {
+  padding: 10px 3px !important;
+}
+
+/* 더 강력한 선택자로 덮어쓰기 */
+.v-table .td,
+.v-table td,
+.v-data-table .v-data-table__td,
+.v-data-table td,
+.v-data-table__wrapper .v-data-table__td,
+.v-data-table__wrapper td {
+  padding: 10px 3px !important;
+}
