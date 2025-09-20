@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: 'SWCM',
   webDir: 'dist',
   server: {
-    allowNavigation: ['jgh9514.com'],
+    allowNavigation: ['jgh9512.cafe24.com'],
   },
   plugins: {
     CapacitorCookies: {
