@@ -5,6 +5,11 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-12-26',
   devtools: { enabled: true },
   srcDir: 'src/',
+  nitro: {
+    prerender: {
+      routes: ['/'],
+    },
+  },
   /**
    * ssr (Server Side Rendering)
    * true: Server Side Rendering 실행
