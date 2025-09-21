@@ -82,5 +82,31 @@ export default defineNuxtConfig({
         external: [],
       },
     },
+    plugins: [
+      {
+        name: 'crypto-polyfill',
+        configResolved(config) {
+          if (!globalThis.crypto) {
+            const crypto = require('crypto');
+            globalThis.crypto = {
+              getRandomValues: array => {
+                const bytes = crypto.randomBytes(array.length);
+                for (let i = 0; i < array.length; i++) {
+                  array[i] = bytes[i];
+                }
+                return array;
+              },
+              randomUUID: () => crypto.randomUUID(),
+              subtle: crypto.webcrypto?.subtle,
+            };
+          }
+        },
+      },
+    ],
+    resolve: {
+      alias: {
+        crypto: 'crypto-browserify',
+      },
+    },
   },
 });

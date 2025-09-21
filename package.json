@@ -19,6 +19,7 @@
     "@capacitor/preferences": "^7.0.1",
     "@nuxtjs/device": "^3.2.4",
     "@popperjs/core": "^2.11.8",
+    "crypto-browserify": "^3.12.1",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.13",
     "jodit-vue": "^3.1.0",

@@ -54,6 +54,7 @@ jobs:
       - name: Set environment variables
         run: |
           echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
+          echo "NODE_ENV=production" >> $GITHUB_ENV
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
