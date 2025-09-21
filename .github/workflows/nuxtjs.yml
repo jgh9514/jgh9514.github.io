@@ -51,6 +51,9 @@ jobs:
         with:
           node-version: "18"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
+      - name: Set environment variables
+        run: |
+          echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:

@@ -19,6 +19,7 @@
     "@capacitor/preferences": "^7.0.1",
     "@nuxtjs/device": "^3.2.4",
     "@popperjs/core": "^2.11.8",
+    "crypto-js": "^4.2.0",
     "dayjs": "^1.11.13",
     "jodit-vue": "^3.1.0",
     "nuxt": "^3.15.0",
@@ -41,7 +42,7 @@
     "nuxt-aos": "^1.2.5",
     "typescript": "^5.7.3"
   },
-  "overrides": { 
+  "overrides": {
     "vue": "^3.5.8"
   }
 }

@@ -70,4 +70,17 @@ export default defineNuxtConfig({
   alias: {
     '@pages': path.resolve(__dirname, 'src/pages'),
   },
+  vite: {
+    define: {
+      global: 'globalThis',
+    },
+    optimizeDeps: {
+      include: ['crypto-js'],
+    },
+    build: {
+      rollupOptions: {
+        external: [],
+      },
+    },
+  },
 });
