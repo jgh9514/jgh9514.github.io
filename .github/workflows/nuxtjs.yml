@@ -65,6 +65,8 @@ jobs:
           npm install
           # Ensure oxc-parser is properly installed
           npm rebuild oxc-parser
+          # Verify all dependencies are installed
+          npm list @pinia/nuxt
       - name: Restore cache
         uses: actions/cache@v4
         with:
