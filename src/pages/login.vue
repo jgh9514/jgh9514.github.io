@@ -187,9 +187,11 @@ const login = async () => {
       
       // 로그인 API 호출
       const loginRes = await $api.get('/common/login', frmDatas.value)
+      console.log('로그인 API 응답:', loginRes)
       
       // whoami API 호출
       const res = await $api.get('/common/whoami')
+      console.log('whoami API 응답:', res)
       
       // userInfo가 있는지 확인
       if (res && res.userInfo) {
@@ -211,6 +213,7 @@ const login = async () => {
         }, 100)
       } else {
         // API 응답 구조 확인
+        console.log('로그인 실패 - 응답 구조:', res)
         if (res && res.result === 'nosession') {
           throw new Error('로그인 세션이 만료되었습니다. 다시 로그인해주세요.')
         } else {
