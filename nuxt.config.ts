@@ -6,12 +6,12 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   srcDir: 'src/',
   app: {
-    baseURL: process.env.NODE_ENV === 'production' ? '/jgh9514.github.io/' : '/',
+    baseURL: '/',
     cdnURL: process.env.NODE_ENV === 'production' ? 'https://jgh9514.github.io' : '',
   },
   nitro: {
     prerender: {
-      routes: ['/'],
+      crawlLinks: true,
     },
   },
   /**
