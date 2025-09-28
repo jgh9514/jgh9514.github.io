@@ -2,9 +2,12 @@
 import path from 'path';
 
 export default defineNuxtConfig({
-  compatibilityDate: '2024-12-26',
+  compatibilityDate: '2025-09-28',
   devtools: { enabled: true },
   srcDir: 'src/',
+  app: {
+    baseURL: process.env.NODE_ENV === 'production' ? '/jgh9514.github.io/' : '/',
+  },
   nitro: {
     prerender: {
       routes: ['/'],
@@ -94,7 +97,7 @@ export default defineNuxtConfig({
           if (!globalThis.crypto) {
             const crypto = require('crypto');
             globalThis.crypto = {
-              getRandomValues: array => {
+              getRandomValues: (array: Uint8Array) => {
                 const bytes = crypto.randomBytes(array.length);
                 for (let i = 0; i < array.length; i++) {
                   array[i] = bytes[i];
