@@ -1,45 +1,43 @@
 <template>
   <div class="monster-search-container component-container">
-    <div class="search-row">
-      <div class="search-input-col">
-        <v-card color="blue-grey-darken-1" class="search-card">
-          <v-autocomplete
-            v-model="selectMonster"
-            :items="monsterNameList"
-            color="blue-grey-lighten-2"
-            :item-title="(item) => `${item.kr_name} ${item.un_name} ${item.modified_kr_name}`"
-            item-value="monster_id"
-            chips
-            closable-chips
-            multiple
-            hide-details
-            clear-on-select
-            placeholder="몬스터 선택"
-            @update:model-value="handleMonsterChange"
-          >
-            <template v-slot:chip="{ props, item }">
-              <v-chip
-                v-bind="props"
-                :prepend-avatar="`${Constants.BASE_URL}${item.raw.image_url}`"
-                :text="item.raw.kr_name"
-                @click:close="remove(item.raw.monster_id)"
-              ></v-chip>
-            </template>
+    <div class="search-input-section">
+      <v-card color="blue-grey-darken-1" class="search-card">
+        <v-autocomplete
+          v-model="selectMonster"
+          :items="monsterNameList"
+          color="blue-grey-lighten-2"
+          :item-title="(item) => `${item.kr_name} ${item.un_name} ${item.modified_kr_name}`"
+          item-value="monster_id"
+          chips
+          closable-chips
+          multiple
+          hide-details
+          clear-on-select
+          placeholder="몬스터 선택"
+          @update:model-value="handleMonsterChange"
+        >
+          <template v-slot:chip="{ props, item }">
+            <v-chip
+              v-bind="props"
+              :prepend-avatar="`${Constants.BASE_URL}${item.raw.image_url}`"
+              :text="item.raw.kr_name"
+              @click:close="remove(item.raw.monster_id)"
+            ></v-chip>
+          </template>
 
-            <template v-slot:item="{ props, item }">
-              <v-list-item
-                v-bind="props"
-                :prepend-avatar="`${Constants.BASE_URL}${item.raw.image_url}`"
-                :title="item.raw.kr_name"
-                :subtitle="`${item.raw.un_name} (${item.raw.modified_kr_name})`"
-              ></v-list-item>
-            </template>
-          </v-autocomplete>
-        </v-card>
-      </div>
-      <div class="search-button-col">
-        <v-btn @click="handleSearch" class="search-btn">검색</v-btn>
-      </div>
+          <template v-slot:item="{ props, item }">
+            <v-list-item
+              v-bind="props"
+              :prepend-avatar="`${Constants.BASE_URL}${item.raw.image_url}`"
+              :title="item.raw.kr_name"
+              :subtitle="`${item.raw.un_name} (${item.raw.modified_kr_name})`"
+            ></v-list-item>
+          </template>
+        </v-autocomplete>
+      </v-card>
+    </div>
+    <div class="search-button-section">
+      <v-btn @click="handleSearch" class="search-btn">검색</v-btn>
     </div>
   </div>
 </template>
@@ -105,31 +103,24 @@ defineExpose({
   overflow: visible;
 }
 
-.search-row {
-  display: flex;
-  align-items: stretch;
-  gap: 0;
-  flex-wrap: nowrap;
+.search-input-section {
+  width: 100%;
   max-width: 600px;
+  margin-bottom: 12px;
 }
 
-.search-input-col {
-  flex: 1;
-  min-width: 0;
-}
-
-.search-button-col {
-  flex-shrink: 0;
+.search-button-section {
   display: flex;
-  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
 }
 
 .search-card {
   width: 100%;
   min-width: 300px;
   height: 54px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+  border-radius: 4px;
 }
 
 .search-card .v-card__content {
@@ -143,15 +134,14 @@ defineExpose({
 
 .search-card .v-field {
   height: 100%;
-  border-radius: 0;
+  border-radius: 4px;
 }
 
 .search-btn {
   height: 54px;
-  min-width: 80px;
+  width: 100%;
   white-space: nowrap;
-  border-radius: 0 4px 4px 0;
-  border-left: none;
+  border-radius: 4px;
 }
 
 .v-list-item--active {
@@ -164,23 +154,18 @@ defineExpose({
     padding: 12px;
   }
   
-  .search-row {
-    gap: 8px;
+  .search-input-section {
+    max-width: none;
+    margin-bottom: 8px;
+  }
+  
+  .search-button-section {
     max-width: none;
   }
   
-  .search-input-col {
-    min-width: 200px;
-  }
-  
-  .search-button-col {
-    flex-shrink: 0;
-  }
-  
   .search-btn {
-    min-width: 60px;
+    width: 100%;
     border-radius: 4px;
-    border-left: 1px solid rgba(0, 0, 0, 0.12);
   }
   
   .search-card {

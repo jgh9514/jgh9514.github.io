@@ -45,13 +45,13 @@
             <td class="link" @click="goDetail(item)">
               {{ item.wizard_name }}
             </td>
-            <td>
+            <td class="text-center">
               {{ item.total_rate + "%" }}
             </td>
-            <td>
+            <td class="text-center">
               {{ item.win_count }}
             </td>
-            <td>
+            <td class="text-center">
               {{ item.lose_count }}
             </td>
           </tr>

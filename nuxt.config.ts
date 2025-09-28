@@ -25,7 +25,6 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@formkit/auto-animate',
     '@nuxtjs/i18n',
-    '@vite-pwa/nuxt',
     'dayjs-nuxt',
     '@nuxtjs/device',
     'nuxt-aos',

@@ -136,10 +136,20 @@ const search = async () => {
 }
 .battle-row {
   display: flex;
-  gap: 10px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 20px;
 }
+.battle-side {
+  flex: 1;
+  min-width: 0;
+}
+
+.battle-vs {
+  flex-shrink: 0;
+  margin: 0 10px;
+}
+
 .battle-row .left-side .guild-name {
   text-align: left;
 }
@@ -153,9 +163,12 @@ const search = async () => {
   text-align: right;
 }
 .monster-images {
+  display: flex;
   gap: 5px;
+  margin-top: 8px;
 }
 .monster-images > img {
   width: 33.3%;
+  height: auto;
 }
 </style>

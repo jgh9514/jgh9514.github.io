@@ -36,7 +36,6 @@
     "@formkit/auto-animate": "^0.8.2",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/i18n": "^9.1.1",
-    "@vite-pwa/nuxt": "^0.10.6",
     "dayjs-nuxt": "^2.1.11",
     "eslint": "^9.19.0",
     "globals": "^15.14.0",
