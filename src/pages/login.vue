@@ -189,6 +189,14 @@ const login = async () => {
       const loginRes = await $api.get('/common/login', frmDatas.value)
       console.log('로그인 API 응답:', loginRes)
       
+      // 로그인 성공 시 토큰 저장
+      if (loginRes && loginRes.token) {
+        // JWT 토큰을 쿠키에 저장
+        const tokenCookie = useCookie(Constants.HEADERS_SMW_AUTHORIZATION)
+        tokenCookie.value = loginRes.token
+        console.log('토큰 저장됨:', loginRes.token)
+      }
+      
       // whoami API 호출
       const res = await $api.get('/common/whoami')
       console.log('whoami API 응답:', res)
