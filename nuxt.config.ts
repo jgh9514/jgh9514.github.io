@@ -7,7 +7,7 @@ export default defineNuxtConfig({
   srcDir: 'src/',
   app: {
     baseURL: '/',
-    cdnURL: process.env.NODE_ENV === 'production' ? 'https://jgh9514.github.io' : '',
+    cdnURL: '/',
   },
   nitro: {
     prerender: {
