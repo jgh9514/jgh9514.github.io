@@ -325,7 +325,7 @@ onMounted(async () => {
 
 const search = async () => {
     const searchData = { ...schData.value, match_id: matchId.value };
-    const res = await $api.get("/summonerswar/monster-detail-list", searchData);
+    const res = await $api.post("/summonerswar/monster-detail-list", searchData);
     enemyData.value = res.enemyData;
     historyList.value = res.historyList;
     recommendedList.value = res.recommendedList;

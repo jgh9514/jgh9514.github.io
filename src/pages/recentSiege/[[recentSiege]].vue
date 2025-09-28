@@ -203,7 +203,19 @@ const getSiegeHistory = async () => {
 };
 
 const showMatchDetail = (item) => {
-  navigateTo(`/siege/${item.match_id}`);
+  // 길드 정보를 sessionStorage에 저장 (길드 ID 포함)
+  const guilds = [
+    { guild_id: item.guild_id_1st, guild_name: item.guild_1st, rating: item.rating_1st },
+    { guild_id: item.guild_id_2nd, guild_name: item.guild_2nd, rating: item.rating_2nd },
+    { guild_id: item.guild_id_3rd, guild_name: item.guild_3rd, rating: item.rating_3rd }
+  ].filter(guild => guild.guild_name); // 빈 값 제거
+  
+  // sessionStorage에 길드 정보 저장
+  sessionStorage.setItem(`siege_guilds_${item.match_id}`, JSON.stringify(guilds));
+  
+  navigateTo({
+    path: `/siege/${item.match_id}`
+  });
 };
 
 const formatDate = (dateString) => {
