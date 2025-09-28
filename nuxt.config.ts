@@ -5,10 +5,6 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-09-28',
   devtools: { enabled: true },
   srcDir: 'src/',
-  app: {
-    baseURL: '/',
-    cdnURL: '/',
-  },
   nitro: {
     prerender: {
       crawlLinks: true,
