@@ -1,49 +1,70 @@
 <template>
-  <div class="full-width" style="height: 100vh;">
-    <div class="absolute-center">
-      <v-card
-        class="mx-auto pa-3"
-        min-width="400"
-        flat
-      >
-        <v-card-item class="mt-4">
-          <div class="text-h5 text-center font-weight-bold">
-            Login
-          </div>
-        </v-card-item>
-        <v-card-item class="mt-4">
-          <v-text-field
-            v-model="frmDatas.user_id"
-            placeholder="ID"
-            color="#2CA4F7"
-            variant="outlined"
-            block
-          />
-          <v-text-field
-            v-model="frmDatas.user_pw"
-            type="password"
-            placeholder="Password"
-            color="#2CA4F7"
-            variant="outlined"
-            block
-            @keyup.enter="login"
-          />
+  <div class="login-container">
+    <div class="login-content" data-aos="fade-up">
+      <!-- 로고 또는 타이틀 영역 -->
+      <div class="login-header">
+        <div class="login-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+            <polyline points="10 17 15 12 10 7"></polyline>
+            <line x1="15" y1="12" x2="3" y2="12"></line>
+          </svg>
+        </div>
+        <h1 class="login-title">환영합니다</h1>
+        <p class="login-subtitle">계정에 로그인하세요</p>
+      </div>
+
+      <!-- 로그인 폼 -->
+      <div class="login-form">
+        <v-text-field
+          v-model="frmDatas.user_id"
+          label="아이디"
+          placeholder="아이디를 입력하세요"
+          variant="outlined"
+          color="primary"
+          density="comfortable"
+          prepend-inner-icon="mdi-account"
+          :disabled="isLoading"
+        />
+        
+        <v-text-field
+          v-model="frmDatas.user_pw"
+          label="비밀번호"
+          placeholder="비밀번호를 입력하세요"
+          type="password"
+          variant="outlined"
+          color="primary"
+          density="comfortable"
+          prepend-inner-icon="mdi-lock"
+          :disabled="isLoading"
+          @keyup.enter="login"
+        />
+
+        <div class="login-options">
           <v-checkbox
             v-model="rememberLogin"
             label="자동 로그인"
-            color="#2CA4F7"
+            color="primary"
+            density="compact"
+            hide-details
+            :disabled="isLoading"
           />
-        </v-card-item>
-        <v-card-item class="mt-2">
-          <v-btn
-            color="red-lighten-2"
-            text="Login"
-            variant="outlined"
-            block
-            @click="login"
-          />
-        </v-card-item>
-      </v-card>
+        </div>
+
+        <v-btn
+          color="primary"
+          size="large"
+          variant="flat"
+          block
+          class="login-button"
+          :loading="isLoading"
+          :disabled="isLoading"
+          @click="login"
+        >
+          <v-icon start>mdi-login</v-icon>
+          로그인
+        </v-btn>
+      </div>
     </div>
   </div>
 </template>
@@ -58,10 +79,6 @@ definePageMeta({
 const userStore = useUserStore()
 
 const validation = () => {
-  // if($gfn_isEmpty(frmDatas.value.cmpy_cd)) {
-  //   alert('회사코드를 입력해주세요.')
-  //   return
-  // }
   if($gfn_isEmpty(frmDatas.value.user_id)) {
     $toast($t('아이디를 입력해주세요.'), 'error')
     return false
@@ -75,7 +92,6 @@ const validation = () => {
 }
 
 const frmDatas = ref({
-  cmpy_cd: '',
   user_id: '',
   user_pw: ''
 })
@@ -108,14 +124,11 @@ const autoLogin = async () => {
   try {
     isLoading.value = true
     
-    // 로그인 API 호출
-    const loginRes = await $api.get('/common/login', frmDatas.value)
+    // 로그인 체크 API 호출 (토큰 기반 자동 로그인)
+    const res = await $api.post('/auth/check', {})
     
-    // whoami API 호출
-    const res = await $api.get('/common/whoami')
-    
-    // userInfo가 있는지 확인
-    if (res && res.userInfo) {
+    // 응답 확인
+    if (res && res.result === 'SUCCESS' && res.userInfo) {
       // 사용자 스토어 업데이트
       userStore.setUserState(res.userInfo)
       
@@ -130,11 +143,13 @@ const autoLogin = async () => {
         navigateTo('/')
       }, 100)
     } else {
-      // API 응답 구조 확인
-      if (res && res.result === 'nosession') {
-        throw new Error('자동 로그인 세션이 만료되었습니다.')
+      // 로그인 실패 처리
+      if (res && res.result === 'NOUSRINFO') {
+        throw new Error('사용자 정보를 찾을 수 없습니다.')
+      } else if (res && res.result === 'LOCKUSRINFO') {
+        throw new Error('계정이 잠겨있습니다.')
       } else {
-        throw new Error('사용자 정보를 가져올 수 없습니다.')
+        throw new Error('자동 로그인 세션이 만료되었습니다.')
       }
     }
   } catch (error) {
@@ -185,24 +200,18 @@ const login = async () => {
     try {
       isLoading.value = true
       
-      // 로그인 API 호출
-      const loginRes = await $api.get('/common/login', frmDatas.value)
-      console.log('로그인 API 응답:', loginRes)
-      
-      // 로그인 성공 시 토큰 저장
-      if (loginRes && loginRes.token) {
-        // JWT 토큰을 쿠키에 저장
-        const tokenCookie = useCookie(Constants.HEADERS_SMW_AUTHORIZATION)
-        tokenCookie.value = loginRes.token
-        console.log('토큰 저장됨:', loginRes.token)
+      // 로그인 파라미터 준비 (백엔드가 기대하는 형식으로)
+      const loginParams = {
+        user_id: frmDatas.value.user_id,
+        password: frmDatas.value.user_pw,
+        auto_login: rememberLogin.value ? 'true' : 'false'
       }
       
-      // whoami API 호출
-      const res = await $api.get('/common/whoami')
-      console.log('whoami API 응답:', res)
+      // 로그인 API 호출
+      const res = await $api.post('/auth/login', loginParams)
       
-      // userInfo가 있는지 확인
-      if (res && res.userInfo) {
+      // 응답 확인
+      if (res && res.result === 'SUCCESS' && res.userInfo) {
         // 사용자 스토어 업데이트
         userStore.setUserState(res.userInfo)
         
@@ -220,13 +229,18 @@ const login = async () => {
           navigateTo('/')
         }, 100)
       } else {
-        // API 응답 구조 확인
-        console.log('로그인 실패 - 응답 구조:', res)
-        if (res && res.result === 'nosession') {
-          throw new Error('로그인 세션이 만료되었습니다. 다시 로그인해주세요.')
-        } else {
-          throw new Error('사용자 정보를 가져올 수 없습니다.')
+        // 로그인 실패 처리
+        let errorMessage = '로그인에 실패했습니다.'
+        
+        if (res && res.result === 'NOUSRINFO') {
+          errorMessage = '사용자 정보를 찾을 수 없습니다.'
+        } else if (res && res.result === 'LOCKUSRINFO') {
+          errorMessage = '계정이 잠겨있습니다.'
+        } else if (res && res.result === 'PWDNOTMATCHED') {
+          errorMessage = '비밀번호가 일치하지 않습니다.'
         }
+        
+        throw new Error(errorMessage)
       }
     } catch (error) {
       console.error('로그인 실패:', error)
@@ -243,10 +257,190 @@ onMounted(async () => {
 })
 </script>
 <style scoped>
-.absolute-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.login-content {
+  width: 100%;
+  max-width: 450px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.login-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.login-icon svg {
+  width: 40px;
+  height: 40px;
+  color: white;
+  stroke-width: 2.5;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 20px rgba(102, 126, 234, 0);
+  }
+}
+
+.login-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.login-subtitle {
+  font-size: 16px;
+  color: #718096;
+  margin: 0;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-options {
+  margin-top: -8px;
+  margin-bottom: -8px;
+}
+
+.login-button {
+  margin-top: 8px;
+  text-transform: none;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  height: 48px !important;
+}
+
+/* 태블릿 (768px 이하) */
+@media (max-width: 768px) {
+  .login-content {
+    padding: 35px 30px;
+    border-radius: 16px;
+  }
+
+  .login-header {
+    margin-bottom: 32px;
+  }
+
+  .login-icon {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 16px;
+  }
+
+  .login-icon svg {
+    width: 35px;
+    height: 35px;
+  }
+
+  .login-title {
+    font-size: 28px;
+    margin-bottom: 6px;
+  }
+
+  .login-subtitle {
+    font-size: 15px;
+  }
+
+  .login-form {
+    gap: 18px;
+  }
+}
+
+/* 모바일 (480px 이하) */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 16px;
+  }
+
+  .login-content {
+    padding: 32px 24px;
+    border-radius: 12px;
+  }
+
+  .login-header {
+    margin-bottom: 28px;
+  }
+
+  .login-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 14px;
+  }
+
+  .login-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .login-title {
+    font-size: 24px;
+    margin-bottom: 4px;
+  }
+
+  .login-subtitle {
+    font-size: 14px;
+  }
+
+  .login-form {
+    gap: 16px;
+  }
+
+  .login-button {
+    height: 44px !important;
+  }
+}
+
+/* 작은 모바일 (360px 이하) */
+@media (max-width: 360px) {
+  .login-content {
+    padding: 28px 20px;
+  }
+
+  .login-title {
+    font-size: 22px;
+  }
+
+  .login-icon {
+    width: 55px;
+    height: 55px;
+  }
+
+  .login-icon svg {
+    width: 28px;
+    height: 28px;
+  }
 }
 </style>

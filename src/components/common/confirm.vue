@@ -1,18 +1,24 @@
 <template>
-  <div class="pa-4 text-center">
-    <v-dialog v-model="confirmStore.$state.isShow" max-width="320" persistent @keydown.enter="confirm">
-      <v-card max-width="400">
-        <v-card-title>{{ confirmStore.$state.title }}</v-card-title>
-        <v-card-text v-html="confirmStore.$state.content"></v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" text="확인" @click="confirm" />
-          <v-btn color="error" text="취소" @click="cancel" />
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </div>
+  <v-dialog
+    v-model="confirmStore.$state.isShow"
+    max-width="320"
+    persistent
+    @keydown.enter="confirm"
+  >
+    <v-card>
+      <v-card-title>{{ confirmStore.$state.title }}</v-card-title>
+      <v-card-text>
+        <div v-html="confirmStore.$state.content"></div>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer />
+        <v-btn color="primary" @click="confirm">확인</v-btn>
+        <v-btn color="error" @click="cancel">취소</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
+
 <script setup>
 const confirmStore = useConfirmStore()
 const confirm = () => {

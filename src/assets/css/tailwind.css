@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Vuetify와 Tailwind CSS 통합을 위한 커스텀 스타일 */
+@layer components {
+  /* Vuetify 컴포넌트와 Tailwind 유틸리티 클래스 조합 */
+  .vuetify-card {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  .vuetify-card:hover {
+    @apply transform -translate-y-1 shadow-lg;
+  }
+  
+  /* 커스텀 그라데이션 */
+  .gradient-primary {
+    @apply bg-gradient-to-r from-primary-500 to-primary-700;
+  }
+  
+  .gradient-secondary {
+    @apply bg-gradient-to-r from-secondary-500 to-secondary-700;
+  }
+  
+  /* 텍스트 그라데이션 */
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent;
+  }
+  
+  /* 커스텀 그림자 */
+  .shadow-soft {
+    box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04);
+  }
+  
+  .shadow-medium {
+    box-shadow: 0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+}
+
+@layer utilities {
+  /* Vuetify와 Tailwind 간격 조정 */
+  .space-vuetify {
+    @apply space-y-4;
+  }
+  
+  .space-vuetify-sm {
+    @apply space-y-2;
+  }
+  
+  .space-vuetify-lg {
+    @apply space-y-6;
+  }
+  
+  /* 반응형 텍스트 크기 */
+  .text-responsive {
+    @apply text-sm sm:text-base md:text-lg lg:text-xl;
+  }
+  
+  .text-responsive-lg {
+    @apply text-lg sm:text-xl md:text-2xl lg:text-3xl;
+  }
+}

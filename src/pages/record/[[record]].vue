@@ -36,7 +36,7 @@
           },
         ]"
         :items="userList"
-        items-per-page="50"
+        :items-per-page="-1"
         class="userList"
         hide-default-footer
       >
@@ -69,9 +69,16 @@ onMounted(async () => {
 });
 
 const search = async () => {
-  const searchData = $gfn_searchDataExtraction(schData.value);
-  const res = await $api.get("/summonerswar/record-list", searchData);
-  userList.value = [...res];
+  try {
+    const searchData = $gfn_searchDataExtraction(schData.value);
+    const res = await $api.post("/summonerswar/record-list", searchData);
+    // 백엔드에서 List<Map<String, ?>> 를 그대로 반환하므로 배열로 처리
+    userList.value = Array.isArray(res) ? res : [];
+  } catch (error) {
+    console.error("전적 목록 조회 실패:", error);
+    userList.value = [];
+    $toast("전적 목록을 불러오는데 실패했습니다.", "error");
+  }
 };
 
 const goDetail = (user) => {

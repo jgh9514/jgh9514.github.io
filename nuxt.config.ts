@@ -22,6 +22,7 @@ export default defineNuxtConfig({
   ssr: false,
   modules: [
     'vuetify-nuxt-module',
+    '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@formkit/auto-animate',
     '@nuxtjs/i18n',
@@ -29,6 +30,7 @@ export default defineNuxtConfig({
     '@nuxtjs/device',
     'nuxt-aos',
     'nuxt-toast',
+    '@vueuse/nuxt',
   ],
   pinia: {
     storesDirs: ['./src/stores/**'],
@@ -70,7 +72,7 @@ export default defineNuxtConfig({
     locales: ['ko', 'en'],
     defaultLocale: 'ko',
   },
-  css: ['~/assets/css/default.scss', '~/assets/css/design.scss'],
+  css: ['~/assets/css/default.scss', '~/assets/css/design.scss', '~/assets/css/tailwind.css'],
   alias: {
     '@pages': path.resolve(__dirname, 'src/pages'),
   },

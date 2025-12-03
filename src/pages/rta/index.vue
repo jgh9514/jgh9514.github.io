@@ -182,7 +182,6 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import { $rtaApi } from '~/utils/service'
 import { Constants } from '~/utils/constants'
 
 const rtaData = ref(null)
@@ -198,9 +197,9 @@ const fetchRtaData = async (page = 1) => {
     error.value = null
     
     const [statsResponse, totalResponse, matchesResponse] = await Promise.all([
-      $rtaApi.get('/api/rta/stats'),
-      $rtaApi.get('/api/rta/matches/count'),
-      $rtaApi.get('/api/rta/matches', { 
+      $api.post('/rta/stat/list'),
+      $api.post('/rta/match/count'),
+      $api.post('/rta/match/list', { 
         limit: itemsPerPage.value, 
         offset: (page - 1) * itemsPerPage.value 
       })

@@ -146,7 +146,7 @@ export const $gfn_isEmptyProxyObject = (value: unknown): boolean => {
  * 예시: const result = await $gfn_getCommonCode('CH00000011')
  */
 export const $gfn_getCommonCode = async (codeGroup: string) => {
-  const response = await $api.get(`/common/sm/cd?cd_grp_no=${codeGroup}`)
+  const response = await $api.post(`/comm/comm-cd`, { cd_grp_no: codeGroup })
   return response.data
 }
 export const $gfn_getCommonCodeArray = async (codeGroups: { [key: string]: any }) => {
@@ -154,12 +154,15 @@ export const $gfn_getCommonCodeArray = async (codeGroups: { [key: string]: any }
     const schData = {
       cd_grp_no: codeGroup,
     };
-    const response = await $api.get(`/common/sm/cd`, schData);
+    const response = await $api.post(`/comm/comm-cd`, schData);
+ 
+    // response는 {codeGroup: Array} 형태로 오므로 codeGroup으로 배열 추출
+    const dataArray = response[codeGroup] || [];
 
     codeGroups[codeGroup] = {
-      cd: response.map((item: { cd: any }) => item.cd),
-      cd_nm: response.map((item: { cd_nm: any }) => item.cd_nm),
-      up_cd: response.map((item: { up_cd: any }) => item.up_cd),
+      cd: dataArray.map((item: { cd: any }) => item.cd),
+      cd_nm: dataArray.map((item: { cd_nm: any }) => item.cd_nm),
+      up_cd: dataArray.map((item: { up_cd: any }) => item.up_cd),
     };
   }
   return codeGroups;
@@ -169,15 +172,19 @@ export const $gfn_getCommonCodeArrayToHierarchy = async (codeGroup: string) => {
   const schData = {
     cd_grp_no: codeGroup
   }
-  const response = await $api.get(`/common/sm/cd`, schData)
+  const response = await $api.post(`/comm/comm-cd`, schData)
+  
+  // response는 {codeGroup: Array} 형태로 오므로 codeGroup으로 배열 추출
+  const dataArray = response[codeGroup] || [];
+  
   const returnData = {  
     keys: [],
     values: [],
     tags: []
   }
-  returnData.tags = response.map((item: { cd: any }) => item.cd)
-  returnData.values = response.map((item: { cd_nm: any }) => item.cd_nm)
-  returnData.keys = response.map((item: { up_cd: any, cd: any }) => [item.up_cd, item.cd])
+  returnData.tags = dataArray.map((item: { cd: any }) => item.cd)
+  returnData.values = dataArray.map((item: { cd_nm: any }) => item.cd_nm)
+  returnData.keys = dataArray.map((item: { up_cd: any, cd: any }) => [item.up_cd, item.cd])
   return returnData
 }
 
@@ -272,13 +279,18 @@ export const $gfn_isAdmin = () => {
   // 'S01', '안전 관리자', '안전보건 담당자'
   // 'C01', '화학물질 담당자', '화학물질 담당자'
   const roleTpCds = userStore.getUserState.roleTpCds // EX: ['G01', 'M01']
-  return roles.includes(Constants.ROLE_ADMIN_CD) || roleTpCds.includes(Constants.ROLE_ADMIN_TP_CD)
+  
+  // roles나 roleTpCds가 undefined이거나 배열이 아닐 경우 방어 처리
+  const rolesArray = Array.isArray(roles) ? roles : []
+  const roleTpCdsArray = Array.isArray(roleTpCds) ? roleTpCds : []
+  
+  return rolesArray.includes(Constants.ROLE_ADMIN_CD) || roleTpCdsArray.includes(Constants.ROLE_ADMIN_TP_CD)
 }
 
 export const $gfn_getRole = () => {
   const userStore = useUserStore()
   const roles = userStore.getUserState.roles // EX: ['RZZZZ', 'R0001']
-  return roles
+  return Array.isArray(roles) ? roles : []
 }
 
 export const $gfn_getRoleTpCd = () => {

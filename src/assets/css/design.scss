@@ -14,6 +14,15 @@ body,
   height: 100%;
 }
 
+/* Toast 위치 조정 - 헤더 아래로 */
+.iziToast-wrapper-topCenter {
+  top: 80px !important;
+}
+
+.custom-toast {
+  margin-top: 10px !important;
+}
+
 /* 전역 공통 스타일 */
 .v-container {
   overflow-y: auto;
@@ -45,54 +54,6 @@ body,
     display: inline-block;
     border-radius: 2px;
     cursor: pointer;
-  }
-}
-
-/* 리얼그리드 컨테이너 스타일 */
-.realgrid_container {
-  .grid_container {
-    .grid_title {
-      line-height: 26px;
-      font-size: 14px;
-      letter-spacing: -1px;
-      font-weight: 600 !important;
-      color: #222 !important;
-    }
-
-  }
-
-  .gray_btn {
-    background-color: #738599;
-    color: #fff;
-    min-width: 64px;
-    padding: 0 16px;
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  /* 그리드 헤더 스타일 */
-  .grid_header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 5px 0;
-    min-height: 30px;
-
-    &_left {
-      font-size: 12px;
-    }
-
-    .grid_header_right {
-      display: flex;
-      gap: 5px;
-    }
-  }
-
-  /* 그리드 헤더 셀 스타일 */
-  .rg-head-cell>div,
-  .rg-header-cell .rg-header-renderer>span,
-  .rg-header-group-cell>div>span {
-    font-weight: 600;
   }
 }
 
@@ -486,6 +447,14 @@ body,
   }
 }
 
+/* 검색 컨테이너 스타일 */
+.search-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
 /* 검색 조건 스타일 */
 .search-condition {
   &-btn {
@@ -526,14 +495,13 @@ body,
 }
 
 
-/* 환경설정 스타일 */
+/* 환경설정 스타일 (v-dialog + v-card 안에서 자연스럽게 보이도록 조정) */
 .set_layout {
-  width: 300px;
-  background: #fff;
-  padding: 10px !important;
-  border-radius: 4px;
-  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
-
+  width: 100%;
+  background: transparent;
+  padding: 8px 0 !important;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .button-container.flex-wrap {
@@ -739,4 +707,8 @@ $tablet-breakpoint: 1023px;
   text-align: center;
   font-size: 11px;
   line-height: 1.2;
+}
+
+.v-table__wrapper {
+  overflow-y: hidden !important;
 }

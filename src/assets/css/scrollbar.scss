@@ -1,7 +1,7 @@
-/* 전역 스크롤바 스타일 */
+/* 전역 스크롤바 스타일 - Firefox */
 html {
   scrollbar-width: thin;
-  scrollbar-color: #888 #f1f1f1;
+  scrollbar-color: rgba(44, 164, 247, 0.6) rgba(0, 0, 0, 0.05);
 }
 
 body {
@@ -11,23 +11,40 @@ body {
   padding: 0;
 }
 
-/* Webkit 브라우저용 스크롤바 스타일 */
+/* Webkit 브라우저용 스크롤바 스타일 (Chrome, Safari, Edge) */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 10px;
+  margin: 2px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
+  background: linear-gradient(180deg, rgba(44, 164, 247, 0.4) 0%, rgba(44, 164, 247, 0.6) 100%);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: all 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: linear-gradient(180deg, rgba(44, 164, 247, 0.6) 0%, rgba(44, 164, 247, 0.8) 100%);
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, rgba(44, 164, 247, 0.8) 0%, rgba(44, 164, 247, 1) 100%);
+  background-clip: padding-box;
+}
+
+/* 스크롤바 코너 */
+::-webkit-scrollbar-corner {
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 10px;
 }
 
 /* 페이지 컨테이너 스크롤 설정 */
@@ -35,7 +52,6 @@ body {
   max-width: 100%;
   overflow-x: hidden;
   overflow-y: visible;
-  min-height: 100vh;
 }
 
 /* 컴포넌트 레벨 스크롤 방지 */
@@ -52,10 +68,53 @@ body {
   overflow: visible;
 }
 
+/* 다크 모드 지원 (향후 확장 가능) */
+@media (prefers-color-scheme: dark) {
+  html {
+    scrollbar-color: rgba(120, 197, 250, 0.6) rgba(255, 255, 255, 0.05);
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(120, 197, 250, 0.4) 0%, rgba(120, 197, 250, 0.6) 100%);
+    background-clip: padding-box;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, rgba(120, 197, 250, 0.6) 0%, rgba(120, 197, 250, 0.8) 100%);
+    background-clip: padding-box;
+  }
+}
+
 /* 모바일 최적화 */
 @media (max-width: 768px) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(44, 164, 247, 0.5) rgba(0, 0, 0, 0.03);
+  }
+  
   ::-webkit-scrollbar {
     width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.01);
+    margin: 1px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(44, 164, 247, 0.3) 0%, rgba(44, 164, 247, 0.5) 100%);
+    border: 1px solid transparent;
+    background-clip: padding-box;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, rgba(44, 164, 247, 0.5) 0%, rgba(44, 164, 247, 0.7) 100%);
+    background-clip: padding-box;
   }
   
   body {

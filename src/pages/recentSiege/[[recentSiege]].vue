@@ -173,7 +173,7 @@ const getSiegeHistory = async () => {
     };
     
     // 전체 개수 조회
-    const totalCountRes = await $api.get("/summonerswar/guild-siege-history-count");
+    const totalCountRes = await $api.post("/summonerswar/guild-siege-history-count", {});
     console.log(totalCountRes);
     if (totalCount) {
       totalCount.value = totalCountRes;
@@ -181,7 +181,7 @@ const getSiegeHistory = async () => {
     }
     
     // 데이터 조회
-    const res = await $api.get("/summonerswar/guild-siege-history", searchData);
+    const res = await $api.post("/summonerswar/guild-siege-history", searchData);
     
     // API 응답 구조 확인 및 데이터 처리
     if (res && Array.isArray(res)) {
@@ -261,7 +261,7 @@ const formatDate = (dateString) => {
       // 날짜가 해당 월을 벗어나면 조정
       if (targetDateDayjs.month() !== month - 1) {
         // 해당 월의 마지막 날짜로 조정
-        const lastDayOfMonth = firstDayOfMonth.endOf('month');
+        const lastDayOfMonth = $dayjs(firstDayOfMonth).endOf('month');
         targetDateDayjs = lastDayOfMonth;
       }
       
