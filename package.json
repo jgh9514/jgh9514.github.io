@@ -44,6 +44,7 @@
     "dayjs-nuxt": "^2.1.11",
     "eslint": "^9.19.0",
     "globals": "^15.14.0",
+    "meow": "^13.2.0",
     "nuxt-aos": "^1.2.5",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3"
